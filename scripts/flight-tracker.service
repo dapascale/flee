@@ -1,0 +1,11 @@
+[Unit]
+Description=Flight tracker check
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=/opt/flight-tracker
+EnvironmentFile=/opt/flight-tracker/.env
+ExecStartPre=/opt/flight-tracker/scripts/rotate_mullvad.sh
+ExecStart=/opt/flight-tracker/.venv/bin/python -m src.main

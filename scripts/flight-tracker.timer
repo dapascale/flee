@@ -1,0 +1,13 @@
+[Unit]
+Description=Run flight tracker check hourly
+
+[Timer]
+OnCalendar=hourly
+# Spreads the actual run a few minutes into the hour and adds jitter,
+# so it's not a suspiciously exact top-of-the-hour hit every time.
+OnCalendar=*:5
+RandomizedDelaySec=600
+Persistent=true
+
+[Install]
+WantedBy=timers.target

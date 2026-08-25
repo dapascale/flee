@@ -1,0 +1,39 @@
+[
+  {
+    "id": "thanksgiving-nyc-denver",
+    "label": "Thanksgiving: NYC → Denver",
+    "origin": "JFK",
+    "destination": "DEN",
+    "depart_date": "2026-11-25",
+    "return_date": "2026-12-01",
+    "trip_type": "round-trip",
+    "cabin": "economy",
+    "adults": 2,
+    "max_stops": 1,
+    "airlines_exclude": ["NK", "F9"],
+    "earliest_departure_hour": 6,
+    "latest_departure_hour": 20,
+    "max_price": 450,
+    "notify_on": "both",
+    "min_drop_amount": 15,
+    "channels": ["ntfy", "email"],
+    "active": true
+  },
+  {
+    "id": "someday-tokyo",
+    "label": "Someday: Tokyo nonstop watch",
+    "origin": "JFK",
+    "destination": "HND",
+    "depart_date": "2027-03-10",
+    "return_date": "2027-03-24",
+    "trip_type": "round-trip",
+    "cabin": "premium-economy",
+    "adults": 1,
+    "max_stops": 0,
+    "max_price": 1400,
+    "notify_on": "price_drop",
+    "min_drop_amount": 50,
+    "channels": ["ntfy"],
+    "active": true
+  }
+]
