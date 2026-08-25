@@ -1,7 +1,12 @@
 name: Check flights
 
 on:
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      search_id:
+        description: "Run only this saved search's id (leave blank for all active searches)"
+        required: false
+        type: string
   schedule:
     # Once-a-day fallback only -- the real cadence is driven by
     # cron-job.org hitting the workflow_dispatch endpoint every 4-6h.
@@ -21,6 +26,7 @@ jobs:
       SMTP_USER: ${{ secrets.SMTP_USER }}
       SMTP_PASS: ${{ secrets.SMTP_PASS }}
       EMAIL_TO: ${{ secrets.EMAIL_TO }}
+      TARGET_SEARCH_ID: ${{ inputs.search_id }}
     steps:
       - uses: actions/checkout@v4
 

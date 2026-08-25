@@ -25,8 +25,8 @@ from .storage import Store, now_iso
 
 CONFIG_PATH = os.environ.get("CONFIG_PATH", "config/searches.json")
 STATE_PATH = os.environ.get("STATE_PATH", "data/state.json")
-PROXY = os.environ.get("SCAN_PROXY")  # e.g. http://127.0.0.1:8888, optional
 SECONDS_BETWEEN_SEARCHES = float(os.environ.get("SECONDS_BETWEEN_SEARCHES", "5"))
+TARGET_SEARCH_ID = os.environ.get("TARGET_SEARCH_ID") or None
 
 
 def format_alert(search: SavedSearch, price: float, airlines: str, stops: int, reason: str) -> tuple[str, str]:
@@ -46,7 +46,7 @@ def format_alert(search: SavedSearch, price: float, airlines: str, stops: int, r
 def check_one(search: SavedSearch, store: Store) -> None:
     state = store.get(search.id)
 
-    offers = search_flights(search, proxy=PROXY)
+    offers = search_flights(search)
     state.last_checked_at = now_iso()
 
     if not offers:
@@ -97,6 +97,11 @@ def main() -> int:
     store = Store(STATE_PATH)
 
     active = [s for s in searches if s.active]
+    if TARGET_SEARCH_ID:
+        active = [s for s in active if s.id == TARGET_SEARCH_ID]
+        if not active:
+            print(f"No active search with id '{TARGET_SEARCH_ID}'", file=sys.stderr)
+            return 1
     print(f"Checking {len(active)} active search(es)...")
 
     exit_code = 0

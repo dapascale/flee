@@ -35,5 +35,25 @@
     "min_drop_amount": 50,
     "channels": ["ntfy"],
     "active": true
+  },
+  {
+    "id": "flexible-orlando",
+    "label": "Flexible: Orlando, any 5-day trip in March",
+    "origin": "JFK",
+    "destination": "MCO",
+    "trip_type": "round-trip",
+    "cabin": "economy",
+    "adults": 2,
+    "date_windows": [
+      { "start": "2027-03-03", "trip_length_days": 5, "label": "early March" },
+      { "start": "2027-03-13", "trip_length_days": 5, "label": "mid March" },
+      { "start": "2027-03-23", "trip_length_days": 5, "label": "late March" }
+    ],
+    "max_stops": 1,
+    "max_price": 250,
+    "notify_on": "both",
+    "min_drop_amount": 15,
+    "channels": ["ntfy"],
+    "active": true
   }
 ]

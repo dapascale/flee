@@ -44,9 +44,10 @@ for two full examples. Key fields:
 | Field | Meaning |
 |---|---|
 | `origin` / `destination` | IATA airport codes |
-| `depart_date` / `return_date` | `YYYY-MM-DD`; omit `return_date` for one-way |
+| `depart_date` / `return_date` | `YYYY-MM-DD`; omit `return_date` for one-way. Mutually exclusive with `date_windows` — set exactly one. |
+| `date_windows` | Up to 4 flexible candidate departure dates instead of one fixed date (see below) |
 | `max_stops` | `0` = nonstop only, `1` = up to one stop, etc. |
-| `airlines_exclude` | IATA airline codes to filter out (e.g. `["NK","F9"]`) |
+| `airlines_include` / `airlines_exclude` | Airline **name** substrings, case-insensitive (e.g. `["Delta"]`) — Google Flights' data only exposes names, not IATA codes |
 | `earliest_departure_hour` / `latest_departure_hour` | 24-hour clock, filters red-eyes etc. |
 | `max_price` | Your target price ceiling |
 | `notify_on` | `"under_max_price"`, `"price_drop"`, or `"both"` |
@@ -54,6 +55,31 @@ for two full examples. Key fields:
 | `channels` | `["ntfy"]`, `["email"]`, or both |
 
 Add or remove searches any time — no code changes needed.
+
+### Flexible dates (`date_windows`)
+
+If you're flexible on dates within a month rather than fixed on one
+exact trip, set `date_windows` instead of `depart_date`/`return_date`:
+
+```json
+"date_windows": [
+  { "start": "2027-03-03", "trip_length_days": 5, "label": "early March" },
+  { "start": "2027-03-13", "trip_length_days": 5, "label": "mid March" },
+  { "start": "2027-03-23", "trip_length_days": 5, "label": "late March" }
+]
+```
+
+Each entry is one concrete candidate departure date (`start` +
+`trip_length_days` for round-trip; `trip_length_days` is ignored for
+one-way) — **not** a scanned range. `label` is just a note for your own
+reference and isn't used for querying. This is capped at 4 windows per
+search on purpose: scanning every day in a date range would multiply
+the number of Google Flights requests per check well beyond what the
+free-tier, bot-detection-conscious design assumes (see "Architecture
+decision" below). If you want true any-day-in-a-month flexibility,
+that needs Google's own price-calendar endpoint, which isn't
+implemented yet — see the code comments in `src/flights.py` for the
+tradeoffs if you want to pursue that later.
 
 ## Notifications
 

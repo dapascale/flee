@@ -1,0 +1,669 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flee — Flight Tracker</title>
+<style>
+  :root {
+    --bg: #0f1115;
+    --panel: #171a21;
+    --panel-border: #2a2f3a;
+    --text: #e8eaed;
+    --muted: #9aa2b1;
+    --accent: #4f8cff;
+    --accent-text: #ffffff;
+    --danger: #ff5d5d;
+    --ok: #34c77b;
+    --warn: #e0a63a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    padding: 16px;
+    padding-bottom: 80px;
+  }
+  h1 { font-size: 1.3rem; margin: 0 0 4px; }
+  .sub { color: var(--muted); font-size: 0.85rem; margin-bottom: 20px; }
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 14px;
+  }
+  label { display: block; font-size: 0.8rem; color: var(--muted); margin: 10px 0 4px; }
+  input, select {
+    width: 100%;
+    background: #0c0e12;
+    border: 1px solid var(--panel-border);
+    color: var(--text);
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 1rem;
+  }
+  input[type="checkbox"] { width: auto; }
+  .row { display: flex; gap: 10px; }
+  .row > * { flex: 1; }
+  button {
+    border: none;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .btn-primary { background: var(--accent); color: var(--accent-text); }
+  .btn-secondary { background: #262b36; color: var(--text); }
+  .btn-danger { background: var(--danger); color: #fff; }
+  .btn-ghost { background: transparent; color: var(--muted); }
+  .btn-small { padding: 6px 10px; font-size: 0.8rem; }
+  .btn-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+  .card { cursor: pointer; }
+  .card-top { display: flex; justify-content: space-between; align-items: flex-start; }
+  .card-title { font-weight: 600; }
+  .card-price { font-weight: 700; color: var(--ok); }
+  .card-meta { color: var(--muted); font-size: 0.82rem; margin-top: 4px; }
+  .badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    padding: 2px 7px;
+    border-radius: 999px;
+    background: #262b36;
+    color: var(--muted);
+    margin-right: 6px;
+  }
+  .badge.inactive { color: var(--warn); }
+  .badge.run { color: var(--accent); }
+  .hidden { display: none !important; }
+  .error { color: var(--danger); font-size: 0.85rem; margin-top: 8px; }
+  .status { font-size: 0.85rem; margin-top: 8px; color: var(--muted); }
+  .fab {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    font-size: 1.6rem;
+    line-height: 56px;
+    text-align: center;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+  }
+  .window-row {
+    border: 1px solid var(--panel-border);
+    border-radius: 8px;
+    padding: 10px;
+    margin-top: 8px;
+    position: relative;
+  }
+  .window-row .btn-danger { position: absolute; top: 8px; right: 8px; }
+  .top-actions { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+  a.link { color: var(--accent); font-size: 0.8rem; }
+  .checkbox-row { display: flex; align-items: center; gap: 8px; margin-top: 10px; }
+  .checkbox-row label { margin: 0; }
+</style>
+</head>
+<body>
+
+<h1>✈ Flee</h1>
+<div class="sub">Saved flight search manager</div>
+
+<!-- SETUP SCREEN -->
+<div id="setup" class="panel hidden">
+  <p>Enter your GitHub repo and a fine-grained Personal Access Token (Actions + Contents: read/write, scoped to this repo only). It's stored only in this browser's local storage — never sent anywhere but <code>api.github.com</code>.</p>
+  <label>Repo (owner/name)</label>
+  <input id="setup-repo" placeholder="dapascale/flee">
+  <label>Personal Access Token</label>
+  <input id="setup-pat" type="password" placeholder="github_pat_...">
+  <div class="btn-row">
+    <button class="btn-primary" onclick="saveSetup()">Save &amp; connect</button>
+  </div>
+  <div id="setup-error" class="error hidden"></div>
+</div>
+
+<!-- LIST SCREEN -->
+<div id="list-screen" class="hidden">
+  <div class="top-actions">
+    <button class="btn-secondary btn-small" onclick="checkAll()">Check all now</button>
+    <a class="link" href="#" onclick="showSetup(); return false;">Settings</a>
+  </div>
+  <div id="list-status" class="status"></div>
+  <div id="list"></div>
+</div>
+
+<div id="fab" class="fab hidden" onclick="openForm(null)">+</div>
+
+<!-- FORM SCREEN -->
+<div id="form-screen" class="hidden">
+  <div class="panel">
+    <label>Label</label>
+    <input id="f-label" placeholder="Thanksgiving: NYC → Denver">
+
+    <div class="row">
+      <div>
+        <label>Origin (IATA)</label>
+        <input id="f-origin" placeholder="JFK" maxlength="3" style="text-transform:uppercase">
+      </div>
+      <div>
+        <label>Destination (IATA)</label>
+        <input id="f-destination" placeholder="DEN" maxlength="3" style="text-transform:uppercase">
+      </div>
+    </div>
+
+    <label>Trip type</label>
+    <select id="f-trip-type" onchange="onTripTypeChange()">
+      <option value="round-trip">Round-trip</option>
+      <option value="one-way">One-way</option>
+    </select>
+
+    <label>Date mode</label>
+    <select id="f-date-mode" onchange="onDateModeChange()">
+      <option value="fixed">Fixed dates</option>
+      <option value="flexible">Flexible (up to 4 candidate dates)</option>
+    </select>
+
+    <div id="fixed-dates">
+      <div class="row">
+        <div>
+          <label>Depart date</label>
+          <input id="f-depart" type="date">
+        </div>
+        <div id="return-date-wrap">
+          <label>Return date</label>
+          <input id="f-return" type="date">
+        </div>
+      </div>
+    </div>
+
+    <div id="flex-dates" class="hidden">
+      <div id="windows-list"></div>
+      <div class="btn-row">
+        <button class="btn-secondary btn-small" onclick="addWindow()">+ Add candidate date</button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <label>Cabin</label>
+        <select id="f-cabin">
+          <option value="economy">Economy</option>
+          <option value="premium-economy">Premium economy</option>
+          <option value="business">Business</option>
+          <option value="first">First</option>
+        </select>
+      </div>
+      <div>
+        <label>Adults</label>
+        <input id="f-adults" type="number" min="1" value="1">
+      </div>
+      <div>
+        <label>Children</label>
+        <input id="f-children" type="number" min="0" value="0">
+      </div>
+    </div>
+
+    <label>Max stops (blank = no limit, 0 = nonstop only)</label>
+    <input id="f-max-stops" type="number" min="0" placeholder="e.g. 1">
+
+    <div class="row">
+      <div>
+        <label>Airlines include (comma-separated names)</label>
+        <input id="f-airlines-include" placeholder="Delta, United">
+      </div>
+      <div>
+        <label>Airlines exclude (comma-separated names)</label>
+        <input id="f-airlines-exclude" placeholder="Spirit, Frontier">
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <label>Earliest departure hour (0-23)</label>
+        <input id="f-earliest-hour" type="number" min="0" max="23">
+      </div>
+      <div>
+        <label>Latest departure hour (0-23)</label>
+        <input id="f-latest-hour" type="number" min="0" max="23">
+      </div>
+    </div>
+
+    <label>Max total duration (minutes, blank = no limit)</label>
+    <input id="f-max-duration" type="number" min="1">
+
+    <label>Max price (target)</label>
+    <input id="f-max-price" type="number" min="0" step="1">
+
+    <label>Notify on</label>
+    <select id="f-notify-on">
+      <option value="both">Under max price OR price drop</option>
+      <option value="under_max_price">Only when under max price</option>
+      <option value="price_drop">Only on price drop</option>
+    </select>
+
+    <label>Minimum drop worth re-notifying about ($)</label>
+    <input id="f-min-drop" type="number" min="0" value="15">
+
+    <div class="checkbox-row">
+      <input id="f-channel-ntfy" type="checkbox" checked>
+      <label style="margin:0">Push notification (ntfy)</label>
+    </div>
+    <div class="checkbox-row">
+      <input id="f-channel-email" type="checkbox" checked>
+      <label style="margin:0">Email</label>
+    </div>
+    <div class="checkbox-row">
+      <input id="f-active" type="checkbox" checked>
+      <label style="margin:0">Active</label>
+    </div>
+
+    <div id="form-error" class="error hidden"></div>
+
+    <div class="btn-row">
+      <button class="btn-primary" onclick="saveSearch()">Save</button>
+      <button class="btn-secondary" onclick="closeForm()">Cancel</button>
+      <button id="delete-btn" class="btn-danger hidden" onclick="deleteSearch()">Delete</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const WORKFLOW_FILE = "check-flights.yml";
+const CONFIG_PATH = "config/searches.json";
+let state = { repo: null, pat: null, searches: [], sha: null, editingId: null, windows: [] };
+
+function api() { return `https://api.github.com/repos/${state.repo}`; }
+
+function ghHeaders() {
+  return {
+    "Authorization": `Bearer ${state.pat}`,
+    "Accept": "application/vnd.github+json",
+  };
+}
+
+// ---------- boot ----------
+function boot() {
+  const repo = localStorage.getItem("flee_repo");
+  const pat = localStorage.getItem("flee_pat");
+  if (!repo || !pat) { showSetup(); return; }
+  state.repo = repo; state.pat = pat;
+  showList();
+  loadSearches();
+}
+
+function showSetup() {
+  document.getElementById("list-screen").classList.add("hidden");
+  document.getElementById("form-screen").classList.add("hidden");
+  document.getElementById("fab").classList.add("hidden");
+  document.getElementById("setup").classList.remove("hidden");
+  document.getElementById("setup-repo").value = localStorage.getItem("flee_repo") || "dapascale/flee";
+  document.getElementById("setup-pat").value = localStorage.getItem("flee_pat") || "";
+}
+
+function showList() {
+  document.getElementById("setup").classList.add("hidden");
+  document.getElementById("form-screen").classList.add("hidden");
+  document.getElementById("list-screen").classList.remove("hidden");
+  document.getElementById("fab").classList.remove("hidden");
+}
+
+async function saveSetup() {
+  const repo = document.getElementById("setup-repo").value.trim();
+  const pat = document.getElementById("setup-pat").value.trim();
+  const err = document.getElementById("setup-error");
+  err.classList.add("hidden");
+  if (!repo || !pat) { err.textContent = "Both fields are required."; err.classList.remove("hidden"); return; }
+
+  state.repo = repo; state.pat = pat;
+  try {
+    const res = await fetch(api(), { headers: ghHeaders() });
+    if (!res.ok) throw new Error(`GitHub says ${res.status} — check the repo name and token.`);
+  } catch (e) {
+    err.textContent = e.message;
+    err.classList.remove("hidden");
+    return;
+  }
+  localStorage.setItem("flee_repo", repo);
+  localStorage.setItem("flee_pat", pat);
+  showList();
+  loadSearches();
+}
+
+// ---------- list ----------
+async function loadSearches() {
+  const statusEl = document.getElementById("list-status");
+  statusEl.textContent = "Loading...";
+  try {
+    const res = await fetch(`${api()}/contents/${CONFIG_PATH}`, { headers: ghHeaders() });
+    if (res.status === 404) {
+      state.searches = []; state.sha = null;
+      statusEl.textContent = "No searches.json yet — add your first search.";
+      renderList();
+      return;
+    }
+    if (!res.ok) throw new Error(`Failed to load searches (${res.status})`);
+    const data = await res.json();
+    state.sha = data.sha;
+    const content = decodeURIComponent(escape(atob(data.content)));
+    state.searches = JSON.parse(content || "[]");
+    statusEl.textContent = "";
+    renderList();
+  } catch (e) {
+    statusEl.textContent = `Error: ${e.message}`;
+  }
+}
+
+function renderList() {
+  const list = document.getElementById("list");
+  if (state.searches.length === 0) {
+    list.innerHTML = `<div class="panel">No saved searches yet. Tap + to add one.</div>`;
+    return;
+  }
+  list.innerHTML = state.searches.map(s => {
+    const dateText = s.date_windows
+      ? `${s.date_windows.length} flexible date${s.date_windows.length > 1 ? "s" : ""}`
+      : `${s.depart_date}${s.return_date ? " → " + s.return_date : ""}`;
+    const priceText = s.max_price ? `$${s.max_price}` : "no target";
+    return `
+      <div class="panel card" onclick="openForm('${s.id}')">
+        <div class="card-top">
+          <div class="card-title">${escapeHtml(s.label)}</div>
+          <div class="card-price">${priceText}</div>
+        </div>
+        <div class="card-meta">${escapeHtml(s.origin)} → ${escapeHtml(s.destination)} · ${dateText}</div>
+        <div class="card-meta">
+          <span class="badge ${s.active ? "" : "inactive"}">${s.active ? "active" : "inactive"}</span>
+          <span class="badge">${escapeHtml(s.notify_on || "both")}</span>
+        </div>
+        <div class="btn-row" onclick="event.stopPropagation()">
+          <button class="btn-secondary btn-small" onclick="checkOne('${s.id}')">Check now</button>
+        </div>
+        <div id="run-status-${s.id}" class="status"></div>
+      </div>
+    `;
+  }).join("");
+}
+
+function escapeHtml(str) {
+  return String(str ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+
+// ---------- form ----------
+function openForm(id) {
+  state.editingId = id;
+  const s = id ? state.searches.find(x => x.id === id) : null;
+
+  document.getElementById("f-label").value = s?.label || "";
+  document.getElementById("f-origin").value = s?.origin || "";
+  document.getElementById("f-destination").value = s?.destination || "";
+  document.getElementById("f-trip-type").value = s?.trip_type || "round-trip";
+  document.getElementById("f-cabin").value = s?.cabin || "economy";
+  document.getElementById("f-adults").value = s?.adults ?? 1;
+  document.getElementById("f-children").value = s?.children ?? 0;
+  document.getElementById("f-max-stops").value = s?.max_stops ?? "";
+  document.getElementById("f-airlines-include").value = (s?.airlines_include || []).join(", ");
+  document.getElementById("f-airlines-exclude").value = (s?.airlines_exclude || []).join(", ");
+  document.getElementById("f-earliest-hour").value = s?.earliest_departure_hour ?? "";
+  document.getElementById("f-latest-hour").value = s?.latest_departure_hour ?? "";
+  document.getElementById("f-max-duration").value = s?.max_duration_minutes ?? "";
+  document.getElementById("f-max-price").value = s?.max_price ?? "";
+  document.getElementById("f-notify-on").value = s?.notify_on || "both";
+  document.getElementById("f-min-drop").value = s?.min_drop_amount ?? 15;
+  document.getElementById("f-channel-ntfy").checked = !s || (s.channels || []).includes("ntfy");
+  document.getElementById("f-channel-email").checked = !s || (s.channels || []).includes("email");
+  document.getElementById("f-active").checked = s ? !!s.active : true;
+
+  if (s?.date_windows) {
+    document.getElementById("f-date-mode").value = "flexible";
+    state.windows = s.date_windows.map(w => ({...w}));
+    document.getElementById("f-depart").value = "";
+    document.getElementById("f-return").value = "";
+  } else {
+    document.getElementById("f-date-mode").value = "fixed";
+    state.windows = [];
+    document.getElementById("f-depart").value = s?.depart_date || "";
+    document.getElementById("f-return").value = s?.return_date || "";
+  }
+
+  onTripTypeChange();
+  onDateModeChange();
+  renderWindows();
+
+  document.getElementById("delete-btn").classList.toggle("hidden", !id);
+  document.getElementById("form-error").classList.add("hidden");
+
+  document.getElementById("list-screen").classList.add("hidden");
+  document.getElementById("fab").classList.add("hidden");
+  document.getElementById("form-screen").classList.remove("hidden");
+}
+
+function closeForm() {
+  document.getElementById("form-screen").classList.add("hidden");
+  showList();
+}
+
+function onTripTypeChange() {
+  const isRoundTrip = document.getElementById("f-trip-type").value === "round-trip";
+  document.getElementById("return-date-wrap").classList.toggle("hidden", !isRoundTrip);
+  renderWindows();
+}
+
+function onDateModeChange() {
+  const flexible = document.getElementById("f-date-mode").value === "flexible";
+  document.getElementById("fixed-dates").classList.toggle("hidden", flexible);
+  document.getElementById("flex-dates").classList.toggle("hidden", !flexible);
+}
+
+function addWindow() {
+  if (state.windows.length >= 4) return;
+  state.windows.push({ start: "", trip_length_days: 5, label: "" });
+  renderWindows();
+}
+
+function removeWindow(idx) {
+  state.windows.splice(idx, 1);
+  renderWindows();
+}
+
+function updateWindow(idx, field, value) {
+  state.windows[idx][field] = value;
+}
+
+function renderWindows() {
+  const isRoundTrip = document.getElementById("f-trip-type").value === "round-trip";
+  const el = document.getElementById("windows-list");
+  el.innerHTML = state.windows.map((w, idx) => `
+    <div class="window-row">
+      <button class="btn-danger btn-small" onclick="removeWindow(${idx})">×</button>
+      <label>Candidate depart date</label>
+      <input type="date" value="${w.start || ""}" onchange="updateWindow(${idx}, 'start', this.value)">
+      ${isRoundTrip ? `
+        <label>Trip length (days)</label>
+        <input type="number" min="1" value="${w.trip_length_days ?? 5}" onchange="updateWindow(${idx}, 'trip_length_days', parseInt(this.value))">
+      ` : ""}
+      <label>Label (optional, for your reference)</label>
+      <input value="${w.label || ""}" placeholder="e.g. early March" onchange="updateWindow(${idx}, 'label', this.value)">
+    </div>
+  `).join("");
+}
+
+function csvList(id) {
+  const raw = document.getElementById(id).value.trim();
+  if (!raw) return null;
+  return raw.split(",").map(s => s.trim()).filter(Boolean);
+}
+
+function numOrNull(id) {
+  const raw = document.getElementById(id).value;
+  return raw === "" ? null : Number(raw);
+}
+
+function buildSearchFromForm() {
+  const tripType = document.getElementById("f-trip-type").value;
+  const dateMode = document.getElementById("f-date-mode").value;
+  const notifyOn = document.getElementById("f-notify-on").value;
+  const maxPrice = numOrNull("f-max-price");
+
+  const search = {
+    id: state.editingId || crypto.randomUUID(),
+    label: document.getElementById("f-label").value.trim(),
+    origin: document.getElementById("f-origin").value.trim().toUpperCase(),
+    destination: document.getElementById("f-destination").value.trim().toUpperCase(),
+    trip_type: tripType,
+    cabin: document.getElementById("f-cabin").value,
+    adults: Number(document.getElementById("f-adults").value || 1),
+    children: Number(document.getElementById("f-children").value || 0),
+    max_stops: numOrNull("f-max-stops"),
+    airlines_include: csvList("f-airlines-include"),
+    airlines_exclude: csvList("f-airlines-exclude"),
+    earliest_departure_hour: numOrNull("f-earliest-hour"),
+    latest_departure_hour: numOrNull("f-latest-hour"),
+    max_duration_minutes: numOrNull("f-max-duration"),
+    max_price: maxPrice,
+    notify_on: notifyOn,
+    min_drop_amount: Number(document.getElementById("f-min-drop").value || 1),
+    channels: [
+      ...(document.getElementById("f-channel-ntfy").checked ? ["ntfy"] : []),
+      ...(document.getElementById("f-channel-email").checked ? ["email"] : []),
+    ],
+    active: document.getElementById("f-active").checked,
+  };
+
+  if (dateMode === "flexible") {
+    search.date_windows = state.windows.map(w => ({
+      start: w.start,
+      ...(tripType === "round-trip" ? { trip_length_days: Number(w.trip_length_days) } : {}),
+      ...(w.label ? { label: w.label } : {}),
+    }));
+  } else {
+    search.depart_date = document.getElementById("f-depart").value;
+    if (tripType === "round-trip") {
+      search.return_date = document.getElementById("f-return").value;
+    }
+  }
+
+  return search;
+}
+
+function validateSearch(s) {
+  if (!s.label) return "Label is required.";
+  if (!/^[A-Z]{3}$/.test(s.origin)) return "Origin must be a 3-letter airport code.";
+  if (!/^[A-Z]{3}$/.test(s.destination)) return "Destination must be a 3-letter airport code.";
+
+  const hasFixed = !!s.depart_date;
+  const hasWindows = !!s.date_windows;
+  if (hasFixed === hasWindows) return "Set exactly one of fixed dates or flexible dates.";
+
+  if (hasFixed) {
+    if (!s.depart_date) return "Depart date is required.";
+    if (s.trip_type === "round-trip" && !s.return_date) return "Return date is required for round-trip.";
+  }
+  if (hasWindows) {
+    if (s.date_windows.length < 1 || s.date_windows.length > 4) return "Use 1-4 flexible candidate dates.";
+    for (const w of s.date_windows) {
+      if (!w.start) return "Every candidate date needs a depart date.";
+      if (s.trip_type === "round-trip" && !w.trip_length_days) return "Every candidate date needs a trip length for round-trip.";
+    }
+  }
+  if (s.max_stops !== null && s.max_stops < 0) return "Max stops can't be negative.";
+  if (s.notify_on === "under_max_price" && s.max_price === null) return "Set a max price, or change 'notify on'.";
+  if (s.channels.length === 0) return "Pick at least one notification channel.";
+  return null;
+}
+
+async function saveSearch() {
+  const search = buildSearchFromForm();
+  const err = validateSearch(search);
+  const errEl = document.getElementById("form-error");
+  if (err) { errEl.textContent = err; errEl.classList.remove("hidden"); return; }
+  errEl.classList.add("hidden");
+
+  const idx = state.searches.findIndex(x => x.id === search.id);
+  if (idx >= 0) state.searches[idx] = search;
+  else state.searches.push(search);
+
+  try {
+    await commitSearches(`${state.editingId ? "Update" : "Add"} search: ${search.label}`);
+    closeForm();
+    loadSearches();
+  } catch (e) {
+    errEl.textContent = e.message;
+    errEl.classList.remove("hidden");
+  }
+}
+
+async function deleteSearch() {
+  if (!confirm("Delete this search?")) return;
+  state.searches = state.searches.filter(x => x.id !== state.editingId);
+  try {
+    await commitSearches(`Delete search: ${state.editingId}`);
+    closeForm();
+    loadSearches();
+  } catch (e) {
+    const errEl = document.getElementById("form-error");
+    errEl.textContent = e.message;
+    errEl.classList.remove("hidden");
+  }
+}
+
+async function commitSearches(message) {
+  const content = JSON.stringify(state.searches, null, 2) + "\n";
+  const encoded = btoa(unescape(encodeURIComponent(content)));
+  const body = { message, content: encoded, branch: "main" };
+  if (state.sha) body.sha = state.sha;
+
+  const res = await fetch(`${api()}/contents/${CONFIG_PATH}`, {
+    method: "PUT",
+    headers: { ...ghHeaders(), "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
+  if (!res.ok) {
+    const detail = await res.json().catch(() => ({}));
+    throw new Error(`Save failed (${res.status}): ${detail.message || "unknown error"}`);
+  }
+  const data = await res.json();
+  state.sha = data.content.sha;
+}
+
+// ---------- run now ----------
+async function dispatch(searchId) {
+  const body = { ref: "main", inputs: searchId ? { search_id: searchId } : {} };
+  const res = await fetch(`${api()}/actions/workflows/${WORKFLOW_FILE}/dispatches`, {
+    method: "POST",
+    headers: { ...ghHeaders(), "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
+  if (!res.ok) throw new Error(`Trigger failed (${res.status})`);
+}
+
+async function checkAll() {
+  const statusEl = document.getElementById("list-status");
+  try {
+    statusEl.textContent = "Triggering a check of all active searches...";
+    await dispatch(null);
+    statusEl.textContent = "Triggered — check the Actions tab, or refresh in a minute.";
+  } catch (e) {
+    statusEl.textContent = `Error: ${e.message}`;
+  }
+}
+
+async function checkOne(searchId) {
+  const el = document.getElementById(`run-status-${searchId}`);
+  el.textContent = "Triggering...";
+  try {
+    await dispatch(searchId);
+    el.textContent = "Triggered — check the Actions tab, or refresh in a minute.";
+  } catch (e) {
+    el.textContent = `Error: ${e.message}`;
+  }
+}
+
+boot();
+</script>
+</body>
+</html>
