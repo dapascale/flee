@@ -20,7 +20,7 @@
     "channels": [
       "email"
     ],
-    "active": false,
+    "active": true,
     "date_windows": [
       {
         "start": "2027-01-10",
