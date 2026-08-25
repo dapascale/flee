@@ -32,5 +32,35 @@
         "trip_length_days": 12
       }
     ]
+  },
+  {
+    "id": "5be9fa5f-6b46-48c0-9150-901ad8956ad7",
+    "label": "Italy 1",
+    "origin": "NYC",
+    "destination": "ROM",
+    "trip_type": "round-trip",
+    "cabin": "economy",
+    "adults": 2,
+    "children": 0,
+    "max_stops": null,
+    "airlines_include": null,
+    "airlines_exclude": null,
+    "earliest_departure_hour": null,
+    "latest_departure_hour": null,
+    "max_duration_minutes": null,
+    "max_price": 500,
+    "notify_on": "both",
+    "min_drop_amount": 50,
+    "channels": [
+      "ntfy",
+      "email"
+    ],
+    "active": true,
+    "date_windows": [
+      {
+        "start": "2027-09-10",
+        "trip_length_days": 16
+      }
+    ]
   }
 ]
