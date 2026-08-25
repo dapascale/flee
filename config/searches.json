@@ -72,5 +72,39 @@
         "trip_length_days": 18
       }
     ]
+  },
+  {
+    "id": "4083896e-d9d6-4721-8159-9f01823598ba",
+    "label": "UK",
+    "origin": "NYC",
+    "destination": "LON",
+    "trip_type": "round-trip",
+    "cabin": "economy",
+    "adults": 2,
+    "children": 0,
+    "max_stops": null,
+    "airlines_include": null,
+    "airlines_exclude": null,
+    "earliest_departure_hour": null,
+    "latest_departure_hour": null,
+    "max_duration_minutes": null,
+    "max_price": 300,
+    "notify_on": "both",
+    "min_drop_amount": 25,
+    "channels": [
+      "ntfy",
+      "email"
+    ],
+    "active": true,
+    "date_windows": [
+      {
+        "start": "2027-04-02",
+        "trip_length_days": 6
+      },
+      {
+        "start": "2027-04-13",
+        "trip_length_days": 65
+      }
+    ]
   }
 ]
