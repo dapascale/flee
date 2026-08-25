@@ -96,13 +96,17 @@ def main() -> int:
     searches = load_searches(CONFIG_PATH)
     store = Store(STATE_PATH)
 
-    active = [s for s in searches if s.active]
     if TARGET_SEARCH_ID:
-        active = [s for s in active if s.id == TARGET_SEARCH_ID]
+        # A specific "check now" request runs regardless of the active
+        # flag -- that's a deliberate one-off action, not the scheduled
+        # sweep, so being paused shouldn't silently no-op it.
+        active = [s for s in searches if s.id == TARGET_SEARCH_ID]
         if not active:
-            print(f"No active search with id '{TARGET_SEARCH_ID}'", file=sys.stderr)
+            print(f"No search with id '{TARGET_SEARCH_ID}'", file=sys.stderr)
             return 1
-    print(f"Checking {len(active)} active search(es)...")
+    else:
+        active = [s for s in searches if s.active]
+    print(f"Checking {len(active)} search(es)...")
 
     exit_code = 0
     for i, search in enumerate(active):
