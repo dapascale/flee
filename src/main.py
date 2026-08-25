@@ -75,6 +75,12 @@ def check_one(search: SavedSearch, store: Store, results_store: Store) -> None:
     # silently unless the price already clears max_price (worth telling you
     # about immediately).
     is_first_check = state.last_notified_price is None
+    # Distinct from is_first_check: a silent baseline still sets
+    # last_notified_price without ever actually notifying (e.g. the price
+    # was over max_price at the time). If max_price is later raised, or
+    # notify_on is changed, the very first real notification shouldn't be
+    # blocked by a drop-amount gate meant for *re*-notifications.
+    has_notified_before = state.last_notified_at is not None
     drop_amount = 0.0 if is_first_check else (state.last_notified_price - best.price)
     moved_enough = drop_amount >= search.min_drop_amount
 
@@ -83,7 +89,7 @@ def check_one(search: SavedSearch, store: Store, results_store: Store) -> None:
     should_notify = False
     reason = ""
 
-    if search.notify_on in ("under_max_price", "both") and under_max and (is_first_check or moved_enough):
+    if search.notify_on in ("under_max_price", "both") and under_max and (not has_notified_before or moved_enough):
         should_notify = True
         reason = f"At or under your ${search.max_price:,.0f} target."
 

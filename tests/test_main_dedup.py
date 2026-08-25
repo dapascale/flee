@@ -100,6 +100,30 @@ def test_results_store_saves_offers_on_every_check(tmp_path):
     ]
 
 
+def test_notifies_after_max_price_raised_even_without_price_drop(tmp_path):
+    # Regression test: first check is over max_price, sets a silent
+    # baseline (never actually notified). max_price is then raised so
+    # the *same* price now qualifies -- this must notify even though
+    # the price itself hasn't moved by min_drop_amount, since the user
+    # has never actually been notified about this search yet.
+    store, results_store = _stores(tmp_path)
+    search = _search(max_price=300, min_drop_amount=50)
+
+    with patch("src.main.search_flights", return_value=_offer(350)), patch("src.main.notify_all") as notify:
+        check_one(search, store, results_store)  # over max_price -> silent baseline
+
+    notify.assert_not_called()
+    assert store.get(search.id).last_notified_at is None
+
+    search.max_price = 400  # raised; same $350 price now qualifies
+
+    with patch("src.main.search_flights", return_value=_offer(350)), patch("src.main.notify_all") as notify:
+        check_one(search, store, results_store)
+
+    notify.assert_called_once()
+    assert store.get(search.id).last_notified_at is not None
+
+
 def test_results_store_saves_empty_offers_when_none_found(tmp_path):
     store, results_store = _stores(tmp_path)
     search = _search()
