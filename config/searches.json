@@ -51,8 +51,7 @@
     "notify_on": "both",
     "min_drop_amount": 50,
     "channels": [
-      "ntfy",
-      "email"
+      "ntfy"
     ],
     "active": true,
     "date_windows": [
