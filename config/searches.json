@@ -14,7 +14,7 @@
     "earliest_departure_hour": null,
     "latest_departure_hour": null,
     "max_duration_minutes": null,
-    "max_price": 350,
+    "max_price": 450,
     "notify_on": "both",
     "min_drop_amount": 50,
     "channels": [
