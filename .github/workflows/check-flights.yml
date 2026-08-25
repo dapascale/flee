@@ -1,0 +1,43 @@
+name: Check flights
+
+on:
+  workflow_dispatch: {}
+  schedule:
+    # Once-a-day fallback only -- the real cadence is driven by
+    # cron-job.org hitting the workflow_dispatch endpoint every 4-6h.
+    - cron: "0 13 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    env:
+      NTFY_SERVER: ${{ vars.NTFY_SERVER }}
+      NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+      SMTP_HOST: ${{ vars.SMTP_HOST }}
+      SMTP_PORT: ${{ vars.SMTP_PORT }}
+      SMTP_USER: ${{ secrets.SMTP_USER }}
+      SMTP_PASS: ${{ secrets.SMTP_PASS }}
+      EMAIL_TO: ${{ secrets.EMAIL_TO }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run flight check
+        run: python -m src.main
+
+      - name: Commit updated state
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/state.json
+          git diff --cached --quiet || git commit -m "Update flight price state [skip ci]"
+          git push
