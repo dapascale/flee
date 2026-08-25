@@ -17,16 +17,19 @@ import os
 import sys
 import time
 import traceback
+from dataclasses import asdict
 
 from .config import SavedSearch, load_searches
 from .flights import search_flights
 from .notify import notify_all
-from .storage import Store, now_iso
+from .storage import SearchResults, Store, now_iso
 
 CONFIG_PATH = os.environ.get("CONFIG_PATH", "config/searches.json")
 STATE_PATH = os.environ.get("STATE_PATH", "data/state.json")
+RESULTS_PATH = os.environ.get("RESULTS_PATH", "data/results.json")
 SECONDS_BETWEEN_SEARCHES = float(os.environ.get("SECONDS_BETWEEN_SEARCHES", "5"))
 TARGET_SEARCH_ID = os.environ.get("TARGET_SEARCH_ID") or None
+MAX_SAVED_OFFERS = 15
 
 
 def format_alert(search: SavedSearch, price: float, airlines: str, stops: int, reason: str) -> tuple[str, str]:
@@ -43,11 +46,19 @@ def format_alert(search: SavedSearch, price: float, airlines: str, stops: int, r
     return title, body
 
 
-def check_one(search: SavedSearch, store: Store) -> None:
+def check_one(search: SavedSearch, store: Store, results_store: Store) -> None:
     state = store.get(search.id)
 
     offers = search_flights(search)
     state.last_checked_at = now_iso()
+
+    results_store.update(
+        search.id,
+        SearchResults(
+            checked_at=state.last_checked_at,
+            offers=[asdict(o) for o in offers[:MAX_SAVED_OFFERS]],
+        ),
+    )
 
     if not offers:
         store.update(search.id, state)
@@ -95,6 +106,7 @@ def check_one(search: SavedSearch, store: Store) -> None:
 def main() -> int:
     searches = load_searches(CONFIG_PATH)
     store = Store(STATE_PATH)
+    results_store = Store(RESULTS_PATH, SearchResults)
 
     if TARGET_SEARCH_ID:
         # A specific "check now" request runs regardless of the active
@@ -111,7 +123,7 @@ def main() -> int:
     exit_code = 0
     for i, search in enumerate(active):
         try:
-            check_one(search, store)
+            check_one(search, store, results_store)
             print(f"  ✓ {search.id} ({search.label})")
         except Exception:  # noqa: BLE001
             exit_code = 1

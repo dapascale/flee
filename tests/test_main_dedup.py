@@ -3,7 +3,7 @@ from unittest.mock import patch
 from src.config import SavedSearch
 from src.flights import FlightOffer
 from src.main import check_one
-from src.storage import Store
+from src.storage import SearchResults, Store
 
 
 def _search(**overrides):
@@ -27,34 +27,38 @@ def _offer(price):
     return [FlightOffer(price=price, airlines="Delta", stops=0, duration_minutes=180, raw_duration="3 hr")]
 
 
+def _stores(tmp_path):
+    return Store(tmp_path / "state.json"), Store(tmp_path / "results.json", SearchResults)
+
+
 def test_first_check_sets_baseline_silently_when_over_max_price(tmp_path):
-    store = Store(tmp_path / "state.json")
+    store, results_store = _stores(tmp_path)
     search = _search()
 
     with patch("src.main.search_flights", return_value=_offer(350)), patch(
         "src.main.notify_all"
     ) as notify:
-        check_one(search, store)
+        check_one(search, store, results_store)
 
     notify.assert_not_called()
     assert store.get(search.id).last_notified_price == 350
 
 
 def test_first_check_notifies_immediately_when_under_max_price(tmp_path):
-    store = Store(tmp_path / "state.json")
+    store, results_store = _stores(tmp_path)
     search = _search()
 
     with patch("src.main.search_flights", return_value=_offer(250)), patch(
         "src.main.notify_all"
     ) as notify:
-        check_one(search, store)
+        check_one(search, store, results_store)
 
     notify.assert_called_once()
     assert store.get(search.id).last_notified_price == 250
 
 
 def test_no_renotify_on_price_wobble_below_min_drop(tmp_path):
-    store = Store(tmp_path / "state.json")
+    store, results_store = _stores(tmp_path)
     search = _search()
     # all above max_price (300) and each within min_drop_amount (15) of the
     # first-check baseline (350), so nothing should ever fire
@@ -63,20 +67,46 @@ def test_no_renotify_on_price_wobble_below_min_drop(tmp_path):
     with patch("src.main.notify_all") as notify:
         for price in prices:
             with patch("src.main.search_flights", return_value=_offer(price)):
-                check_one(search, store)
+                check_one(search, store, results_store)
 
     notify.assert_not_called()
 
 
 def test_renotify_when_price_drops_enough(tmp_path):
-    store = Store(tmp_path / "state.json")
+    store, results_store = _stores(tmp_path)
     search = _search()
 
     with patch("src.main.notify_all") as notify:
         with patch("src.main.search_flights", return_value=_offer(350)):
-            check_one(search, store)  # baseline, no notify
+            check_one(search, store, results_store)  # baseline, no notify
         with patch("src.main.search_flights", return_value=_offer(280)):
-            check_one(search, store)  # under max_price and dropped 70 -> notify
+            check_one(search, store, results_store)  # under max_price, dropped 70 -> notify
 
     assert notify.call_count == 1
     assert store.get(search.id).last_notified_price == 280
+
+
+def test_results_store_saves_offers_on_every_check(tmp_path):
+    store, results_store = _stores(tmp_path)
+    search = _search()
+
+    with patch("src.main.search_flights", return_value=_offer(350)), patch("src.main.notify_all"):
+        check_one(search, store, results_store)
+
+    results = results_store.get(search.id)
+    assert results.checked_at is not None
+    assert results.offers == [
+        {"price": 350, "airlines": "Delta", "stops": 0, "duration_minutes": 180, "raw_duration": "3 hr"}
+    ]
+
+
+def test_results_store_saves_empty_offers_when_none_found(tmp_path):
+    store, results_store = _stores(tmp_path)
+    search = _search()
+
+    with patch("src.main.search_flights", return_value=[]), patch("src.main.notify_all"):
+        check_one(search, store, results_store)
+
+    results = results_store.get(search.id)
+    assert results.checked_at is not None
+    assert results.offers == []

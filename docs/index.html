@@ -127,6 +127,10 @@
   .picker-result:active, .picker-result:hover { background: #20242e; }
   .picker-result .code { color: var(--accent); font-weight: 600; margin-left: 6px; }
   .picker-result .sub { color: var(--muted); font-size: 0.75rem; margin-top: 2px; }
+  .results-table { width: 100%; border-collapse: collapse; margin-top: 6px; font-size: 0.82rem; }
+  .results-table th, .results-table td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--panel-border); }
+  .results-table th { color: var(--muted); font-weight: 600; cursor: pointer; white-space: nowrap; }
+  .results-table td:first-child { color: var(--ok); font-weight: 600; }
 </style>
 </head>
 <body>
@@ -150,7 +154,10 @@
 <!-- LIST SCREEN -->
 <div id="list-screen" class="hidden">
   <div class="top-actions">
-    <button class="btn-secondary btn-small" onclick="checkAll()">Check all now</button>
+    <div class="btn-row" style="margin-top:0">
+      <button class="btn-secondary btn-small" onclick="checkAll()">Check all now</button>
+      <button class="btn-secondary btn-small" onclick="loadSearches()">Refresh</button>
+    </div>
     <a class="link" href="#" onclick="showSetup(); return false;">Settings</a>
   </div>
   <div id="list-status" class="status"></div>
@@ -302,7 +309,7 @@ const METRO_CODES = [{"code":"NYC","city":"New York","country":"United States","
 
 const WORKFLOW_FILE = "check-flights.yml";
 const CONFIG_PATH = "config/searches.json";
-let state = { repo: null, pat: null, searches: [], sha: null, editingId: null, windows: [] };
+let state = { repo: null, pat: null, searches: [], sha: null, editingId: null, windows: [], stateData: {}, resultsData: {} };
 
 function api() { return `https://api.github.com/repos/${state.repo}`; }
 
@@ -362,6 +369,15 @@ async function saveSetup() {
 }
 
 // ---------- list ----------
+async function fetchJsonFile(path) {
+  const res = await fetch(`${api()}/contents/${path}`, { headers: ghHeaders() });
+  if (res.status === 404) return {};
+  if (!res.ok) throw new Error(`Failed to load ${path} (${res.status})`);
+  const data = await res.json();
+  const content = decodeURIComponent(escape(atob(data.content)));
+  return JSON.parse(content || "{}");
+}
+
 async function loadSearches() {
   const statusEl = document.getElementById("list-status");
   statusEl.textContent = "Loading...";
@@ -378,11 +394,30 @@ async function loadSearches() {
     state.sha = data.sha;
     const content = decodeURIComponent(escape(atob(data.content)));
     state.searches = JSON.parse(content || "[]");
+
+    const [stateData, resultsData] = await Promise.all([
+      fetchJsonFile("data/state.json").catch(() => ({})),
+      fetchJsonFile("data/results.json").catch(() => ({})),
+    ]);
+    state.stateData = stateData;
+    state.resultsData = resultsData;
+
     statusEl.textContent = "";
     renderList();
   } catch (e) {
     statusEl.textContent = `Error: ${e.message}`;
   }
+}
+
+function relativeTime(iso) {
+  if (!iso) return null;
+  const diffMs = Date.now() - new Date(iso).getTime();
+  const mins = Math.round(diffMs / 60000);
+  if (mins < 1) return "just now";
+  if (mins < 60) return `${mins}m ago`;
+  const hours = Math.round(mins / 60);
+  if (hours < 24) return `${hours}h ago`;
+  return `${Math.round(hours / 24)}d ago`;
 }
 
 function renderList() {
@@ -396,6 +431,15 @@ function renderList() {
       ? `${s.date_windows.length} flexible date${s.date_windows.length > 1 ? "s" : ""}`
       : `${s.depart_date}${s.return_date ? " → " + s.return_date : ""}`;
     const priceText = s.max_price ? `$${s.max_price}` : "no target";
+
+    const searchState = state.stateData[s.id];
+    const checkedRel = searchState ? relativeTime(searchState.last_checked_at) : null;
+    const summaryText = checkedRel
+      ? `Checked ${checkedRel}${searchState.lowest_price_seen ? ` · lowest seen $${searchState.lowest_price_seen.toLocaleString()}` : ""}`
+      : "Not checked yet";
+
+    const offerCount = (state.resultsData[s.id]?.offers || []).length;
+
     return `
       <div class="panel card" onclick="openForm('${s.id}')">
         <div class="card-top">
@@ -407,13 +451,72 @@ function renderList() {
           <span class="badge ${s.active ? "" : "inactive"}">${s.active ? "active" : "inactive"}</span>
           <span class="badge">${escapeHtml(s.notify_on || "both")}</span>
         </div>
+        <div class="card-meta">${summaryText}</div>
         <div class="btn-row" onclick="event.stopPropagation()">
           <button class="btn-secondary btn-small" onclick="checkOne('${s.id}')">Check now</button>
+          <button class="btn-secondary btn-small" onclick="toggleResults('${s.id}')">Results${offerCount ? ` (${offerCount})` : ""}</button>
         </div>
         <div id="run-status-${s.id}" class="status"></div>
+        <div id="results-panel-${s.id}" class="hidden" onclick="event.stopPropagation()"></div>
       </div>
     `;
   }).join("");
+}
+
+const resultsSortState = {}; // searchId -> { key, dir }
+
+function toggleResults(id) {
+  const panel = document.getElementById(`results-panel-${id}`);
+  const willShow = panel.classList.contains("hidden");
+  panel.classList.toggle("hidden");
+  if (willShow) {
+    resultsSortState[id] = resultsSortState[id] || { key: "price", dir: 1 };
+    renderResultsTable(id);
+  }
+}
+
+function sortResultsBy(id, key) {
+  const cur = resultsSortState[id] || { key: "price", dir: 1 };
+  resultsSortState[id] = cur.key === key ? { key, dir: -cur.dir } : { key, dir: 1 };
+  renderResultsTable(id);
+}
+
+function renderResultsTable(id) {
+  const panel = document.getElementById(`results-panel-${id}`);
+  const record = state.resultsData[id];
+  const offers = record?.offers || [];
+
+  if (offers.length === 0) {
+    panel.innerHTML = `<div class="status">No results yet — run a check.</div>`;
+    return;
+  }
+
+  const { key, dir } = resultsSortState[id] || { key: "price", dir: 1 };
+  const sorted = [...offers].sort((a, b) => {
+    const av = a[key] ?? 0, bv = b[key] ?? 0;
+    return av < bv ? -dir : av > bv ? dir : 0;
+  });
+
+  const col = (label, k) => `<th onclick="sortResultsBy('${id}', '${k}')">${label}${key === k ? (dir === 1 ? " ▲" : " ▼") : ""}</th>`;
+
+  panel.innerHTML = `
+    <div class="status">As of ${relativeTime(record.checked_at) || "unknown"}</div>
+    <div style="overflow-x:auto">
+      <table class="results-table">
+        <thead><tr>${col("Price", "price")}${col("Airline", "airlines")}${col("Stops", "stops")}${col("Duration", "duration_minutes")}</tr></thead>
+        <tbody>
+          ${sorted.map(o => `
+            <tr>
+              <td>$${o.price.toLocaleString()}</td>
+              <td>${escapeHtml(o.airlines)}</td>
+              <td>${o.stops === 0 ? "nonstop" : o.stops}</td>
+              <td>${escapeHtml(o.raw_duration || "")}</td>
+            </tr>
+          `).join("")}
+        </tbody>
+      </table>
+    </div>
+  `;
 }
 
 function escapeHtml(str) {
