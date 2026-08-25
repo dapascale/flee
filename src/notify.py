@@ -28,7 +28,11 @@ def send_ntfy(title: str, message: str, priority: str = "default", url: str | No
     if url is None:
         url = f"{server}/{topic}"
 
-    headers = {"Title": title, "Priority": priority}
+    # httpx encodes str header values as ASCII by default, which breaks
+    # on titles containing emoji/non-ASCII (e.g. "✈ ..."). ntfy expects
+    # raw UTF-8 bytes in the Title header, so encode it ourselves --
+    # passing bytes skips httpx's ASCII-only encoding path.
+    headers = {"Title": title.encode("utf-8"), "Priority": priority.encode("utf-8")}
     resp = httpx.post(url, data=message.encode("utf-8"), headers=headers, timeout=15)
     resp.raise_for_status()
 
