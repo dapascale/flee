@@ -1,0 +1,31 @@
+[
+  {
+    "id": "523db75f-fce0-4d41-8677-a1968c682f71",
+    "label": "Orlando in winter",
+    "origin": "NYC",
+    "destination": "MCO",
+    "trip_type": "round-trip",
+    "cabin": "economy",
+    "adults": 2,
+    "children": 0,
+    "max_stops": null,
+    "airlines_include": null,
+    "airlines_exclude": null,
+    "earliest_departure_hour": null,
+    "latest_departure_hour": null,
+    "max_duration_minutes": null,
+    "max_price": 350,
+    "notify_on": "both",
+    "min_drop_amount": 50,
+    "channels": [
+      "email"
+    ],
+    "active": false,
+    "date_windows": [
+      {
+        "start": "2027-01-10",
+        "trip_length_days": 10
+      }
+    ]
+  }
+]
