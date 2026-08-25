@@ -26,6 +26,7 @@ jobs:
       SMTP_USER: ${{ secrets.SMTP_USER }}
       SMTP_PASS: ${{ secrets.SMTP_PASS }}
       EMAIL_TO: ${{ secrets.EMAIL_TO }}
+      APP_URL: ${{ vars.APP_URL }}
       TARGET_SEARCH_ID: ${{ inputs.search_id }}
     steps:
       - uses: actions/checkout@v4

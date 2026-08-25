@@ -86,6 +86,26 @@ def test_renotify_when_price_drops_enough(tmp_path):
     assert store.get(search.id).last_notified_price == 280
 
 
+def test_partial_notify_failure_still_persists_state(tmp_path):
+    # Regression test: notify_all raises when e.g. email is misconfigured,
+    # even though ntfy (attempted first, inside notify_all) succeeded.
+    # check_one must not let that exception skip persisting state --
+    # otherwise a broken email config causes the same search to re-fire
+    # a real ntfy push on every future check, forever.
+    store, results_store = _stores(tmp_path)
+    search = _search(max_price=300, notify_on="under_max_price")
+
+    with patch("src.main.search_flights", return_value=_offer(250)), patch(
+        "src.main.notify_all", side_effect=RuntimeError("email failed: bad credentials")
+    ):
+        check_one(search, store, results_store)  # should not raise
+
+    state = store.get(search.id)
+    assert state.last_notified_price == 250
+    assert state.last_notified_at is not None
+    assert state.last_checked_at is not None
+
+
 def test_results_store_saves_offers_on_every_check(tmp_path):
     store, results_store = _stores(tmp_path)
     search = _search()

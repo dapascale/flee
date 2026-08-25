@@ -99,7 +99,16 @@ def check_one(search: SavedSearch, store: Store, results_store: Store) -> None:
 
     if should_notify:
         title, body = format_alert(search, best.price, best.airlines, best.stops, reason)
-        notify_all(search.channels, title, body)
+        try:
+            notify_all(search.channels, title, body)
+        except Exception as e:  # noqa: BLE001
+            # notify_all already attempts every channel independently and
+            # only raises after collecting all failures -- a broken email
+            # config shouldn't erase that ntfy succeeded, and shouldn't
+            # skip persisting state below (which would otherwise make this
+            # search re-attempt, and re-send successful channels, on every
+            # future check until the broken channel is fixed).
+            print(f"  ! {search.id} notify partially failed: {e}", file=sys.stderr)
         state.last_notified_price = best.price
         state.last_notified_at = now_iso()
     elif is_first_check:

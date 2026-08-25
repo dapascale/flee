@@ -14,7 +14,13 @@ from email.message import EmailMessage
 import httpx
 
 
-def send_ntfy(title: str, message: str, priority: str = "default", url: str | None = None) -> None:
+def send_ntfy(
+    title: str,
+    message: str,
+    priority: str = "default",
+    url: str | None = None,
+    click_url: str | None = None,
+) -> None:
     """
     Posts to ntfy (self-hosted or the free public ntfy.sh instance).
 
@@ -22,6 +28,10 @@ def send_ntfy(title: str, message: str, priority: str = "default", url: str | No
       NTFY_SERVER  - e.g. https://ntfy.sh  or  https://ntfy.yourdomain.com
       NTFY_TOPIC   - your private topic name (treat it like a password --
                      anyone who knows it can read/publish to it on a public server)
+
+    `click_url`, if given, makes tapping the push notification open that
+    URL (ntfy's "Click" header) -- e.g. the app's own URL, so you can jump
+    straight from the notification to the results.
     """
     server = os.environ.get("NTFY_SERVER", "https://ntfy.sh").rstrip("/")
     topic = os.environ["NTFY_TOPIC"]
@@ -33,6 +43,8 @@ def send_ntfy(title: str, message: str, priority: str = "default", url: str | No
     # raw UTF-8 bytes in the Title header, so encode it ourselves --
     # passing bytes skips httpx's ASCII-only encoding path.
     headers = {"Title": title.encode("utf-8"), "Priority": priority.encode("utf-8")}
+    if click_url:
+        headers["Click"] = click_url.encode("utf-8")
     resp = httpx.post(url, data=message.encode("utf-8"), headers=headers, timeout=15)
     resp.raise_for_status()
 
@@ -67,10 +79,17 @@ def send_email(subject: str, body: str) -> None:
 
 
 def notify_all(channels: list[str], title: str, message: str) -> None:
+    # APP_URL, if set, links a notification back to the app -- e.g. the
+    # GitHub Pages/Cloudflare Pages URL the UI is hosted at -- so you can
+    # tap through to the full results instead of just seeing the price.
+    app_url = os.environ.get("APP_URL") or None
+    if app_url:
+        message = f"{message}\n\n{app_url}"
+
     errors = []
     if "ntfy" in channels:
         try:
-            send_ntfy(title, message)
+            send_ntfy(title, message, click_url=app_url)
         except Exception as e:  # noqa: BLE001
             errors.append(f"ntfy failed: {e}")
     if "email" in channels:

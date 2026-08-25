@@ -153,7 +153,11 @@ either way).
 **2. Add your secrets and variables** — repo Settings → Secrets and
 variables → Actions:
    - *Secrets* (sensitive): `NTFY_TOPIC`, `SMTP_USER`, `SMTP_PASS`, `EMAIL_TO`
-   - *Variables* (not sensitive): `NTFY_SERVER` (e.g. `https://ntfy.sh`), `SMTP_HOST`, `SMTP_PORT`
+   - *Variables* (not sensitive): `NTFY_SERVER` (e.g. `https://ntfy.sh`), `SMTP_HOST`, `SMTP_PORT`,
+     and optionally `APP_URL` (the URL the UI is hosted at, e.g. your GitHub
+     Pages or Cloudflare Pages URL) — when set, every notification links
+     back to it, so tapping a push (or the link in an email) takes you
+     straight to the app instead of just showing a price.
 
 **3. Create a GitHub Personal Access Token** to let cron-job.org trigger
 your workflow:
