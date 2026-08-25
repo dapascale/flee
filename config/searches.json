@@ -59,7 +59,13 @@
     "date_windows": [
       {
         "start": "2027-09-10",
-        "trip_length_days": 16
+        "trip_length_days": 16,
+        "label": "Fri Sept 10"
+      },
+      {
+        "start": "2027-09-17",
+        "trip_length_days": 5,
+        "label": "Fri Sept 17"
       }
     ]
   }
