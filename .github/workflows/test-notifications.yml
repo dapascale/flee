@@ -1,0 +1,29 @@
+name: Test notifications
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      NTFY_SERVER: ${{ vars.NTFY_SERVER }}
+      NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+      SMTP_HOST: ${{ vars.SMTP_HOST }}
+      SMTP_PORT: ${{ vars.SMTP_PORT }}
+      SMTP_USER: ${{ secrets.SMTP_USER }}
+      SMTP_PASS: ${{ secrets.SMTP_PASS }}
+      EMAIL_TO: ${{ secrets.EMAIL_TO }}
+      APP_URL: ${{ vars.APP_URL }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Send a test notification on every channel
+        run: python -c "from src.notify import notify_all; notify_all(['ntfy', 'email'], 'Test notification', 'If you see this, notifications are working.')"
