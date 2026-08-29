@@ -1,111 +1,111 @@
 {
   "523db75f-fce0-4d41-8677-a1968c682f71": {
-    "checked_at": "2026-08-25T13:35:55.604190+00:00",
+    "checked_at": "2026-08-29T13:53:04.933484+00:00",
     "offers": [
       {
-        "price": 406.0,
+        "price": 446.0,
         "airlines": "American",
         "stops": 0,
         "duration_minutes": 190,
         "raw_duration": "3 hr 10 min"
       },
       {
-        "price": 406.0,
+        "price": 446.0,
+        "airlines": "Delta",
+        "stops": 0,
+        "duration_minutes": 179,
+        "raw_duration": "2 hr 59 min"
+      },
+      {
+        "price": 446.0,
+        "airlines": "JetBlue",
+        "stops": 0,
+        "duration_minutes": 178,
+        "raw_duration": "2 hr 58 min"
+      },
+      {
+        "price": 446.0,
+        "airlines": "Delta",
+        "stops": 0,
+        "duration_minutes": 178,
+        "raw_duration": "2 hr 58 min"
+      },
+      {
+        "price": 446.0,
         "airlines": "American",
         "stops": 0,
         "duration_minutes": 195,
         "raw_duration": "3 hr 15 min"
       },
       {
-        "price": 406.0,
+        "price": 446.0,
+        "airlines": "Delta",
+        "stops": 0,
+        "duration_minutes": 179,
+        "raw_duration": "2 hr 59 min"
+      },
+      {
+        "price": 446.0,
         "airlines": "American",
         "stops": 0,
         "duration_minutes": 193,
         "raw_duration": "3 hr 13 min"
       },
       {
-        "price": 406.0,
+        "price": 446.0,
+        "airlines": "Delta",
+        "stops": 0,
+        "duration_minutes": 180,
+        "raw_duration": "3 hr"
+      },
+      {
+        "price": 446.0,
         "airlines": "American",
         "stops": 0,
         "duration_minutes": 184,
         "raw_duration": "3 hr 4 min"
       },
       {
-        "price": 406.0,
+        "price": 446.0,
         "airlines": "American",
         "stops": 0,
         "duration_minutes": 190,
         "raw_duration": "3 hr 10 min"
       },
       {
-        "price": 406.0,
+        "price": 446.0,
+        "airlines": "Delta",
+        "stops": 0,
+        "duration_minutes": 179,
+        "raw_duration": "2 hr 59 min"
+      },
+      {
+        "price": 446.0,
+        "airlines": "Delta",
+        "stops": 0,
+        "duration_minutes": 178,
+        "raw_duration": "2 hr 58 min"
+      },
+      {
+        "price": 446.0,
         "airlines": "American",
         "stops": 0,
         "duration_minutes": 195,
         "raw_duration": "3 hr 15 min"
       },
       {
-        "price": 406.0,
+        "price": 446.0,
+        "airlines": "Delta",
+        "stops": 0,
+        "duration_minutes": 179,
+        "raw_duration": "2 hr 59 min"
+      },
+      {
+        "price": 446.0,
         "airlines": "American",
         "stops": 0,
         "duration_minutes": 193,
         "raw_duration": "3 hr 13 min"
-      },
-      {
-        "price": 406.0,
-        "airlines": "American",
-        "stops": 0,
-        "duration_minutes": 184,
-        "raw_duration": "3 hr 4 min"
-      },
-      {
-        "price": 414.0,
-        "airlines": "United",
-        "stops": 0,
-        "duration_minutes": 174,
-        "raw_duration": "2 hr 54 min"
-      },
-      {
-        "price": 414.0,
-        "airlines": "United",
-        "stops": 0,
-        "duration_minutes": 174,
-        "raw_duration": "2 hr 54 min"
-      },
-      {
-        "price": 414.0,
-        "airlines": "United",
-        "stops": 0,
-        "duration_minutes": 165,
-        "raw_duration": "2 hr 45 min"
-      },
-      {
-        "price": 414.0,
-        "airlines": "United",
-        "stops": 0,
-        "duration_minutes": 163,
-        "raw_duration": "2 hr 43 min"
-      },
-      {
-        "price": 414.0,
-        "airlines": "United",
-        "stops": 0,
-        "duration_minutes": 169,
-        "raw_duration": "2 hr 49 min"
-      },
-      {
-        "price": 414.0,
-        "airlines": "United",
-        "stops": 0,
-        "duration_minutes": 165,
-        "raw_duration": "2 hr 45 min"
-      },
-      {
-        "price": 414.0,
-        "airlines": "United",
-        "stops": 0,
-        "duration_minutes": 168,
-        "raw_duration": "2 hr 48 min"
       }
     ]
   },
