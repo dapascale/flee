@@ -27,6 +27,7 @@ jobs:
       SMTP_PASS: ${{ secrets.SMTP_PASS }}
       EMAIL_TO: ${{ secrets.EMAIL_TO }}
       APP_URL: ${{ vars.APP_URL }}
+      MIN_SECONDS_BETWEEN_SWEEPS: ${{ vars.MIN_SECONDS_BETWEEN_SWEEPS }}
       TARGET_SEARCH_ID: ${{ inputs.search_id }}
     steps:
       - uses: actions/checkout@v4

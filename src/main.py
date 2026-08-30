@@ -18,6 +18,7 @@ import sys
 import time
 import traceback
 from dataclasses import asdict
+from datetime import datetime, timezone
 
 from .config import SavedSearch, load_searches
 from .flights import search_flights
@@ -30,6 +31,15 @@ RESULTS_PATH = os.environ.get("RESULTS_PATH", "data/results.json")
 SECONDS_BETWEEN_SEARCHES = float(os.environ.get("SECONDS_BETWEEN_SEARCHES", "5"))
 TARGET_SEARCH_ID = os.environ.get("TARGET_SEARCH_ID") or None
 MAX_SAVED_OFFERS = 15
+# Floor on how often the *scheduled sweep* (checking every active search)
+# is allowed to actually run, no matter how often something external --
+# cron-job.org misconfigured, a duplicate cron job, GitHub's own retry
+# behavior -- fires workflow_dispatch. A misconfigured trigger hammering
+# Google Flights every few minutes is exactly the bot-detection risk this
+# project's whole free-tier design was meant to avoid. A single-search
+# "check now" (TARGET_SEARCH_ID set) is a deliberate one-off action and
+# is never rate-limited by this.
+MIN_SECONDS_BETWEEN_SWEEPS = float(os.environ.get("MIN_SECONDS_BETWEEN_SWEEPS") or 3 * 3600)
 
 
 def format_alert(search: SavedSearch, price: float, airlines: str, stops: int, reason: str) -> tuple[str, str]:
@@ -118,6 +128,15 @@ def check_one(search: SavedSearch, store: Store, results_store: Store) -> None:
     store.update(search.id, state)
 
 
+def seconds_since_last_sweep(searches: list[SavedSearch], store: Store) -> float | None:
+    checked_ats = [store.get(s.id).last_checked_at for s in searches]
+    checked_ats = [t for t in checked_ats if t]
+    if not checked_ats:
+        return None
+    most_recent = max(datetime.fromisoformat(t) for t in checked_ats)
+    return (datetime.now(timezone.utc) - most_recent).total_seconds()
+
+
 def main() -> int:
     searches = load_searches(CONFIG_PATH)
     store = Store(STATE_PATH)
@@ -133,6 +152,14 @@ def main() -> int:
             return 1
     else:
         active = [s for s in searches if s.active]
+        elapsed = seconds_since_last_sweep(active, store)
+        if elapsed is not None and elapsed < MIN_SECONDS_BETWEEN_SWEEPS:
+            print(
+                f"Last sweep was {elapsed / 60:.0f} min ago (minimum "
+                f"{MIN_SECONDS_BETWEEN_SWEEPS / 60:.0f} min) -- skipping "
+                "to avoid hammering Google Flights."
+            )
+            return 0
     print(f"Checking {len(active)} search(es)...")
 
     exit_code = 0

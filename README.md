@@ -158,6 +158,15 @@ variables → Actions:
      Pages or Cloudflare Pages URL) — when set, every notification links
      back to it, so tapping a push (or the link in an email) takes you
      straight to the app instead of just showing a price.
+   - Also optionally: `MIN_SECONDS_BETWEEN_SWEEPS` (default 10800 = 3
+     hours) — a floor on how often the *scheduled sweep* (checking every
+     active search) is allowed to actually run, regardless of how often
+     something external triggers it. This protects against a
+     misconfigured cron-job.org schedule (or a duplicate job) hammering
+     Google Flights every few minutes, which is exactly the kind of
+     volume that gets an IP bot-blocked. A "check now" for one specific
+     search from the UI always runs immediately and ignores this floor —
+     it's only the automatic sweep that's rate-limited.
 
 **3. Create a GitHub Personal Access Token** to let cron-job.org trigger
 your workflow:
