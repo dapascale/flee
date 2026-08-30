@@ -1,6 +1,6 @@
 {
   "523db75f-fce0-4d41-8677-a1968c682f71": {
-    "checked_at": "2026-08-30T18:15:24.881598+00:00",
+    "checked_at": "2026-08-30T18:30:29.255247+00:00",
     "offers": [
       {
         "price": 444.0,
@@ -74,43 +74,43 @@
       },
       {
         "price": 446.0,
-        "airlines": "",
+        "airlines": "American",
         "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
+        "duration_minutes": 195,
+        "raw_duration": "3 hr 15 min"
       },
       {
         "price": 446.0,
-        "airlines": "",
+        "airlines": "Delta",
         "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
+        "duration_minutes": 179,
+        "raw_duration": "2 hr 59 min"
       },
       {
         "price": 446.0,
-        "airlines": "",
+        "airlines": "JetBlue",
         "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
+        "duration_minutes": 178,
+        "raw_duration": "2 hr 58 min"
       },
       {
         "price": 446.0,
-        "airlines": "",
+        "airlines": "Delta",
         "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
+        "duration_minutes": 178,
+        "raw_duration": "2 hr 58 min"
       },
       {
         "price": 446.0,
-        "airlines": "",
+        "airlines": "American",
         "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
+        "duration_minutes": 193,
+        "raw_duration": "3 hr 13 min"
       }
     ]
   },
   "4083896e-d9d6-4721-8159-9f01823598ba": {
-    "checked_at": "2026-08-30T18:15:38.923319+00:00",
+    "checked_at": "2026-08-30T18:30:43.879234+00:00",
     "offers": [
       {
         "price": 1202.0,
