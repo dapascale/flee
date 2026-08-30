@@ -1,76 +1,76 @@
 {
   "523db75f-fce0-4d41-8677-a1968c682f71": {
-    "checked_at": "2026-08-30T17:15:25.165334+00:00",
+    "checked_at": "2026-08-30T17:30:27.919551+00:00",
     "offers": [
       {
         "price": 444.0,
-        "airlines": "",
-        "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
+        "airlines": "United",
+        "stops": 1,
+        "duration_minutes": 356,
+        "raw_duration": "5 hr 56 min"
       },
       {
         "price": 444.0,
-        "airlines": "",
-        "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
+        "airlines": "United",
+        "stops": 1,
+        "duration_minutes": 480,
+        "raw_duration": "8 hr"
       },
       {
         "price": 444.0,
-        "airlines": "",
-        "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
+        "airlines": "United",
+        "stops": 1,
+        "duration_minutes": 546,
+        "raw_duration": "9 hr 6 min"
       },
       {
         "price": 444.0,
-        "airlines": "",
-        "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
+        "airlines": "United",
+        "stops": 1,
+        "duration_minutes": 500,
+        "raw_duration": "8 hr 20 min"
       },
       {
         "price": 444.0,
-        "airlines": "",
-        "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
+        "airlines": "United",
+        "stops": 1,
+        "duration_minutes": 448,
+        "raw_duration": "7 hr 28 min"
       },
       {
         "price": 444.0,
-        "airlines": "",
-        "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
+        "airlines": "United",
+        "stops": 1,
+        "duration_minutes": 356,
+        "raw_duration": "5 hr 56 min"
       },
       {
         "price": 444.0,
-        "airlines": "",
-        "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
+        "airlines": "United",
+        "stops": 1,
+        "duration_minutes": 480,
+        "raw_duration": "8 hr"
       },
       {
         "price": 444.0,
-        "airlines": "",
-        "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
+        "airlines": "United",
+        "stops": 1,
+        "duration_minutes": 546,
+        "raw_duration": "9 hr 6 min"
       },
       {
         "price": 444.0,
-        "airlines": "",
-        "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
+        "airlines": "United",
+        "stops": 1,
+        "duration_minutes": 500,
+        "raw_duration": "8 hr 20 min"
       },
       {
         "price": 444.0,
-        "airlines": "",
-        "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
+        "airlines": "United",
+        "stops": 1,
+        "duration_minutes": 448,
+        "raw_duration": "7 hr 28 min"
       },
       {
         "price": 446.0,
@@ -110,7 +110,7 @@
     ]
   },
   "4083896e-d9d6-4721-8159-9f01823598ba": {
-    "checked_at": "2026-08-30T17:08:00.492162+00:00",
+    "checked_at": "2026-08-30T17:30:40.192204+00:00",
     "offers": [
       {
         "price": 1202.0,
