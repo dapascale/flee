@@ -2,13 +2,13 @@
   "523db75f-fce0-4d41-8677-a1968c682f71": {
     "lowest_price_seen": 406.0,
     "last_notified_price": 406.0,
-    "last_checked_at": "2026-08-30T00:15:24.082986+00:00",
+    "last_checked_at": "2026-08-30T00:45:22.868568+00:00",
     "last_notified_at": null
   },
   "4083896e-d9d6-4721-8159-9f01823598ba": {
     "lowest_price_seen": 1202.0,
     "last_notified_price": 1203.0,
-    "last_checked_at": "2026-08-30T00:30:37.684256+00:00",
+    "last_checked_at": "2026-08-30T00:45:35.131110+00:00",
     "last_notified_at": null
   }
 }
