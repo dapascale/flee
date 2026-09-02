@@ -1,111 +1,111 @@
 {
   "523db75f-fce0-4d41-8677-a1968c682f71": {
-    "checked_at": "2026-09-02T12:00:32.539902+00:00",
+    "checked_at": "2026-09-02T16:00:37.887445+00:00",
     "offers": [
       {
-        "price": 446.0,
-        "airlines": "",
-        "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
-      },
-      {
-        "price": 446.0,
-        "airlines": "",
-        "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
-      },
-      {
-        "price": 446.0,
-        "airlines": "",
-        "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
-      },
-      {
-        "price": 446.0,
-        "airlines": "",
-        "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
-      },
-      {
-        "price": 446.0,
-        "airlines": "",
-        "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
-      },
-      {
-        "price": 446.0,
-        "airlines": "",
-        "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
-      },
-      {
-        "price": 446.0,
-        "airlines": "",
-        "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
-      },
-      {
-        "price": 446.0,
-        "airlines": "",
-        "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
-      },
-      {
-        "price": 446.0,
-        "airlines": "",
-        "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
-      },
-      {
-        "price": 446.0,
-        "airlines": "",
-        "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
-      },
-      {
-        "price": 453.0,
+        "price": 444.0,
         "airlines": "United",
         "stops": 1,
         "duration_minutes": 356,
         "raw_duration": "5 hr 56 min"
       },
       {
-        "price": 453.0,
+        "price": 444.0,
         "airlines": "United",
         "stops": 1,
         "duration_minutes": 480,
         "raw_duration": "8 hr"
       },
       {
-        "price": 453.0,
+        "price": 444.0,
         "airlines": "United",
         "stops": 1,
         "duration_minutes": 546,
         "raw_duration": "9 hr 6 min"
       },
       {
-        "price": 453.0,
+        "price": 444.0,
         "airlines": "United",
         "stops": 1,
         "duration_minutes": 500,
         "raw_duration": "8 hr 20 min"
       },
       {
-        "price": 453.0,
+        "price": 444.0,
         "airlines": "United",
         "stops": 1,
         "duration_minutes": 448,
         "raw_duration": "7 hr 28 min"
+      },
+      {
+        "price": 444.0,
+        "airlines": "United",
+        "stops": 1,
+        "duration_minutes": 296,
+        "raw_duration": "4 hr 56 min"
+      },
+      {
+        "price": 444.0,
+        "airlines": "United",
+        "stops": 1,
+        "duration_minutes": 356,
+        "raw_duration": "5 hr 56 min"
+      },
+      {
+        "price": 444.0,
+        "airlines": "United",
+        "stops": 1,
+        "duration_minutes": 480,
+        "raw_duration": "8 hr"
+      },
+      {
+        "price": 444.0,
+        "airlines": "United",
+        "stops": 1,
+        "duration_minutes": 546,
+        "raw_duration": "9 hr 6 min"
+      },
+      {
+        "price": 444.0,
+        "airlines": "United",
+        "stops": 1,
+        "duration_minutes": 500,
+        "raw_duration": "8 hr 20 min"
+      },
+      {
+        "price": 444.0,
+        "airlines": "United",
+        "stops": 1,
+        "duration_minutes": 448,
+        "raw_duration": "7 hr 28 min"
+      },
+      {
+        "price": 444.0,
+        "airlines": "United",
+        "stops": 1,
+        "duration_minutes": 296,
+        "raw_duration": "4 hr 56 min"
+      },
+      {
+        "price": 446.0,
+        "airlines": "",
+        "stops": 0,
+        "duration_minutes": null,
+        "raw_duration": ""
+      },
+      {
+        "price": 446.0,
+        "airlines": "",
+        "stops": 0,
+        "duration_minutes": null,
+        "raw_duration": ""
+      },
+      {
+        "price": 446.0,
+        "airlines": "",
+        "stops": 0,
+        "duration_minutes": null,
+        "raw_duration": ""
       }
     ]
   },
