@@ -1,76 +1,76 @@
 {
   "523db75f-fce0-4d41-8677-a1968c682f71": {
-    "checked_at": "2026-09-02T08:00:39.852453+00:00",
+    "checked_at": "2026-09-02T12:00:32.539902+00:00",
     "offers": [
       {
         "price": 446.0,
-        "airlines": "American",
+        "airlines": "",
         "stops": 0,
-        "duration_minutes": 195,
-        "raw_duration": "3 hr 15 min"
+        "duration_minutes": null,
+        "raw_duration": ""
       },
       {
         "price": 446.0,
-        "airlines": "JetBlue",
+        "airlines": "",
         "stops": 0,
-        "duration_minutes": 178,
-        "raw_duration": "2 hr 58 min"
+        "duration_minutes": null,
+        "raw_duration": ""
       },
       {
         "price": 446.0,
-        "airlines": "American",
+        "airlines": "",
         "stops": 0,
-        "duration_minutes": 193,
-        "raw_duration": "3 hr 13 min"
+        "duration_minutes": null,
+        "raw_duration": ""
       },
       {
         "price": 446.0,
-        "airlines": "American",
+        "airlines": "",
         "stops": 0,
-        "duration_minutes": 195,
-        "raw_duration": "3 hr 15 min"
+        "duration_minutes": null,
+        "raw_duration": ""
       },
       {
         "price": 446.0,
-        "airlines": "American",
+        "airlines": "",
         "stops": 0,
-        "duration_minutes": 189,
-        "raw_duration": "3 hr 9 min"
+        "duration_minutes": null,
+        "raw_duration": ""
       },
       {
         "price": 446.0,
-        "airlines": "American",
+        "airlines": "",
         "stops": 0,
-        "duration_minutes": 195,
-        "raw_duration": "3 hr 15 min"
+        "duration_minutes": null,
+        "raw_duration": ""
       },
       {
         "price": 446.0,
-        "airlines": "JetBlue",
+        "airlines": "",
         "stops": 0,
-        "duration_minutes": 178,
-        "raw_duration": "2 hr 58 min"
+        "duration_minutes": null,
+        "raw_duration": ""
       },
       {
         "price": 446.0,
-        "airlines": "American",
+        "airlines": "",
         "stops": 0,
-        "duration_minutes": 193,
-        "raw_duration": "3 hr 13 min"
+        "duration_minutes": null,
+        "raw_duration": ""
       },
       {
         "price": 446.0,
-        "airlines": "American",
+        "airlines": "",
         "stops": 0,
-        "duration_minutes": 195,
-        "raw_duration": "3 hr 15 min"
+        "duration_minutes": null,
+        "raw_duration": ""
       },
       {
         "price": 446.0,
-        "airlines": "American",
+        "airlines": "",
         "stops": 0,
-        "duration_minutes": 189,
-        "raw_duration": "3 hr 9 min"
+        "duration_minutes": null,
+        "raw_duration": ""
       },
       {
         "price": 453.0,
@@ -110,17 +110,17 @@
     ]
   },
   "4083896e-d9d6-4721-8159-9f01823598ba": {
-    "checked_at": "2026-09-02T08:00:53.891297+00:00",
+    "checked_at": "2026-09-02T12:00:46.713983+00:00",
     "offers": [
       {
-        "price": 1252.0,
+        "price": 1317.0,
         "airlines": "Scandinavian Airlines",
         "stops": 1,
         "duration_minutes": 685,
         "raw_duration": "11 hr 25 min"
       },
       {
-        "price": 1252.0,
+        "price": 1317.0,
         "airlines": "Scandinavian Airlines",
         "stops": 1,
         "duration_minutes": 685,
@@ -172,50 +172,50 @@
         "price": 1326.0,
         "airlines": "American, British Airways",
         "stops": 2,
-        "duration_minutes": 1070,
-        "raw_duration": "17 hr 50 min"
+        "duration_minutes": 1160,
+        "raw_duration": "19 hr 20 min"
       },
       {
         "price": 1326.0,
         "airlines": "American, British Airways",
         "stops": 2,
-        "duration_minutes": 1070,
-        "raw_duration": "17 hr 50 min"
+        "duration_minutes": 1160,
+        "raw_duration": "19 hr 20 min"
       },
       {
         "price": 1326.0,
         "airlines": "American, British Airways",
         "stops": 2,
-        "duration_minutes": 1070,
-        "raw_duration": "17 hr 50 min"
+        "duration_minutes": 1075,
+        "raw_duration": "17 hr 55 min"
       },
       {
         "price": 1326.0,
         "airlines": "American, British Airways",
         "stops": 2,
-        "duration_minutes": 1300,
-        "raw_duration": "21 hr 40 min"
+        "duration_minutes": 1075,
+        "raw_duration": "17 hr 55 min"
       },
       {
         "price": 1326.0,
         "airlines": "American, British Airways",
         "stops": 2,
-        "duration_minutes": 1300,
-        "raw_duration": "21 hr 40 min"
+        "duration_minutes": 1075,
+        "raw_duration": "17 hr 55 min"
       },
       {
         "price": 1326.0,
         "airlines": "American, British Airways",
         "stops": 2,
-        "duration_minutes": 1300,
-        "raw_duration": "21 hr 40 min"
+        "duration_minutes": 1305,
+        "raw_duration": "21 hr 45 min"
       },
       {
         "price": 1326.0,
         "airlines": "American, British Airways",
         "stops": 2,
-        "duration_minutes": 951,
-        "raw_duration": "15 hr 51 min"
+        "duration_minutes": 1305,
+        "raw_duration": "21 hr 45 min"
       }
     ]
   }
