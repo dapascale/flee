@@ -1,48 +1,34 @@
 {
   "523db75f-fce0-4d41-8677-a1968c682f71": {
-    "checked_at": "2026-09-03T20:00:36.086325+00:00",
+    "checked_at": "2026-09-04T08:00:34.429293+00:00",
     "offers": [
       {
-        "price": 446.0,
-        "airlines": "JetBlue",
+        "price": 453.0,
+        "airlines": "",
         "stops": 0,
-        "duration_minutes": 178,
-        "raw_duration": "2 hr 58 min"
+        "duration_minutes": null,
+        "raw_duration": ""
       },
       {
-        "price": 446.0,
-        "airlines": "JetBlue",
+        "price": 453.0,
+        "airlines": "",
         "stops": 0,
-        "duration_minutes": 178,
-        "raw_duration": "2 hr 58 min"
+        "duration_minutes": null,
+        "raw_duration": ""
       },
       {
         "price": 453.0,
-        "airlines": "United",
-        "stops": 1,
-        "duration_minutes": 534,
-        "raw_duration": "8 hr 54 min"
+        "airlines": "",
+        "stops": 0,
+        "duration_minutes": null,
+        "raw_duration": ""
       },
       {
         "price": 453.0,
-        "airlines": "United",
-        "stops": 1,
-        "duration_minutes": 500,
-        "raw_duration": "8 hr 20 min"
-      },
-      {
-        "price": 453.0,
-        "airlines": "United",
-        "stops": 1,
-        "duration_minutes": 534,
-        "raw_duration": "8 hr 54 min"
-      },
-      {
-        "price": 453.0,
-        "airlines": "United",
-        "stops": 1,
-        "duration_minutes": 500,
-        "raw_duration": "8 hr 20 min"
+        "airlines": "",
+        "stops": 0,
+        "duration_minutes": null,
+        "raw_duration": ""
       },
       {
         "price": 453.0,
@@ -106,6 +92,20 @@
         "stops": 1,
         "duration_minutes": 546,
         "raw_duration": "9 hr 6 min"
+      },
+      {
+        "price": 453.0,
+        "airlines": "United",
+        "stops": 1,
+        "duration_minutes": 500,
+        "raw_duration": "8 hr 20 min"
+      },
+      {
+        "price": 453.0,
+        "airlines": "United",
+        "stops": 1,
+        "duration_minutes": 448,
+        "raw_duration": "7 hr 28 min"
       }
     ]
   },
