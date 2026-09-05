@@ -1,6 +1,6 @@
 {
   "523db75f-fce0-4d41-8677-a1968c682f71": {
-    "checked_at": "2026-09-05T15:44:42.634556+00:00",
+    "checked_at": "2026-09-05T20:00:29.093713+00:00",
     "offers": [
       {
         "price": 446.0,
@@ -45,7 +45,14 @@
         "raw_duration": ""
       },
       {
-        "price": 454.0,
+        "price": 446.0,
+        "airlines": "",
+        "stops": 0,
+        "duration_minutes": null,
+        "raw_duration": ""
+      },
+      {
+        "price": 446.0,
         "airlines": "",
         "stops": 0,
         "duration_minutes": null,
@@ -59,14 +66,7 @@
         "raw_duration": ""
       },
       {
-        "price": 466.0,
-        "airlines": "",
-        "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
-      },
-      {
-        "price": 466.0,
+        "price": 454.0,
         "airlines": "",
         "stops": 0,
         "duration_minutes": null,
