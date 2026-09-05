@@ -1,111 +1,111 @@
 {
   "523db75f-fce0-4d41-8677-a1968c682f71": {
-    "checked_at": "2026-09-05T08:00:37.345144+00:00",
+    "checked_at": "2026-09-05T12:00:28.915854+00:00",
     "offers": [
       {
         "price": 446.0,
-        "airlines": "",
+        "airlines": "American",
         "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
+        "duration_minutes": 195,
+        "raw_duration": "3 hr 15 min"
       },
       {
         "price": 446.0,
-        "airlines": "",
+        "airlines": "American",
         "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
+        "duration_minutes": 193,
+        "raw_duration": "3 hr 13 min"
       },
       {
         "price": 446.0,
-        "airlines": "",
+        "airlines": "American",
         "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
+        "duration_minutes": 189,
+        "raw_duration": "3 hr 9 min"
       },
       {
         "price": 446.0,
-        "airlines": "",
+        "airlines": "American",
         "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
+        "duration_minutes": 195,
+        "raw_duration": "3 hr 15 min"
       },
       {
         "price": 446.0,
-        "airlines": "",
+        "airlines": "American",
         "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
+        "duration_minutes": 193,
+        "raw_duration": "3 hr 13 min"
       },
       {
         "price": 446.0,
-        "airlines": "",
+        "airlines": "American",
         "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
+        "duration_minutes": 189,
+        "raw_duration": "3 hr 9 min"
       },
       {
         "price": 454.0,
-        "airlines": "",
+        "airlines": "JetBlue",
         "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
+        "duration_minutes": 178,
+        "raw_duration": "2 hr 58 min"
       },
       {
         "price": 454.0,
-        "airlines": "",
+        "airlines": "JetBlue",
         "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
+        "duration_minutes": 178,
+        "raw_duration": "2 hr 58 min"
       },
       {
         "price": 466.0,
-        "airlines": "",
-        "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
+        "airlines": "American",
+        "stops": 1,
+        "duration_minutes": 302,
+        "raw_duration": "5 hr 2 min"
       },
       {
         "price": 466.0,
-        "airlines": "",
-        "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
+        "airlines": "American",
+        "stops": 1,
+        "duration_minutes": 423,
+        "raw_duration": "7 hr 3 min"
       },
       {
         "price": 466.0,
-        "airlines": "",
-        "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
+        "airlines": "American",
+        "stops": 1,
+        "duration_minutes": 356,
+        "raw_duration": "5 hr 56 min"
       },
       {
         "price": 466.0,
-        "airlines": "",
-        "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
+        "airlines": "American",
+        "stops": 1,
+        "duration_minutes": 419,
+        "raw_duration": "6 hr 59 min"
       },
       {
         "price": 466.0,
-        "airlines": "",
-        "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
+        "airlines": "American",
+        "stops": 1,
+        "duration_minutes": 499,
+        "raw_duration": "8 hr 19 min"
       },
       {
         "price": 466.0,
-        "airlines": "",
-        "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
+        "airlines": "American",
+        "stops": 1,
+        "duration_minutes": 412,
+        "raw_duration": "6 hr 52 min"
       },
       {
         "price": 466.0,
-        "airlines": "",
-        "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
+        "airlines": "American",
+        "stops": 1,
+        "duration_minutes": 334,
+        "raw_duration": "5 hr 34 min"
       }
     ]
   },
