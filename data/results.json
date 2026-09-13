@@ -1,23 +1,16 @@
 {
   "523db75f-fce0-4d41-8677-a1968c682f71": {
-    "checked_at": "2026-09-12T20:00:30.817822+00:00",
+    "checked_at": "2026-09-13T00:00:33.712075+00:00",
     "offers": [
       {
         "price": 442.0,
-        "airlines": "Frontier",
+        "airlines": "",
         "stops": 0,
-        "duration_minutes": 185,
-        "raw_duration": "3 hr 5 min"
+        "duration_minutes": null,
+        "raw_duration": ""
       },
       {
         "price": 442.0,
-        "airlines": "Frontier",
-        "stops": 0,
-        "duration_minutes": 185,
-        "raw_duration": "3 hr 5 min"
-      },
-      {
-        "price": 470.0,
         "airlines": "",
         "stops": 0,
         "duration_minutes": null,
@@ -31,60 +24,67 @@
         "raw_duration": ""
       },
       {
-        "price": 494.0,
-        "airlines": "JetBlue",
+        "price": 470.0,
+        "airlines": "",
         "stops": 0,
-        "duration_minutes": 187,
-        "raw_duration": "3 hr 7 min"
+        "duration_minutes": null,
+        "raw_duration": ""
       },
       {
         "price": 494.0,
-        "airlines": "JetBlue",
+        "airlines": "",
         "stops": 0,
-        "duration_minutes": 180,
-        "raw_duration": "3 hr"
+        "duration_minutes": null,
+        "raw_duration": ""
       },
       {
         "price": 494.0,
-        "airlines": "JetBlue",
+        "airlines": "",
         "stops": 0,
-        "duration_minutes": 191,
-        "raw_duration": "3 hr 11 min"
+        "duration_minutes": null,
+        "raw_duration": ""
       },
       {
         "price": 494.0,
-        "airlines": "JetBlue",
+        "airlines": "",
         "stops": 0,
-        "duration_minutes": 186,
-        "raw_duration": "3 hr 6 min"
+        "duration_minutes": null,
+        "raw_duration": ""
       },
       {
         "price": 494.0,
-        "airlines": "JetBlue",
+        "airlines": "",
         "stops": 0,
-        "duration_minutes": 187,
-        "raw_duration": "3 hr 7 min"
+        "duration_minutes": null,
+        "raw_duration": ""
       },
       {
         "price": 494.0,
-        "airlines": "JetBlue",
+        "airlines": "",
         "stops": 0,
-        "duration_minutes": 180,
-        "raw_duration": "3 hr"
+        "duration_minutes": null,
+        "raw_duration": ""
       },
       {
         "price": 494.0,
-        "airlines": "JetBlue",
+        "airlines": "",
         "stops": 0,
-        "duration_minutes": 191,
-        "raw_duration": "3 hr 11 min"
+        "duration_minutes": null,
+        "raw_duration": ""
       },
       {
         "price": 494.0,
-        "airlines": "JetBlue",
+        "airlines": "",
         "stops": 0,
-        "duration_minutes": 186,
-        "raw_duration": "3 hr 6 min"
+        "duration_minutes": null,
+        "raw_duration": ""
+      },
+      {
+        "price": 494.0,
+        "airlines": "",
+        "stops": 0,
+        "duration_minutes": null,
+        "raw_duration": ""
       },
       {
         "price": 494.0,
@@ -110,7 +110,7 @@
     ]
   },
   "4083896e-d9d6-4721-8159-9f01823598ba": {
-    "checked_at": "2026-09-12T15:58:05.046798+00:00",
+    "checked_at": "2026-09-13T00:00:47.716290+00:00",
     "offers": [
       {
         "price": 1260.0,
