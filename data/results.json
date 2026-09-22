@@ -1,6 +1,6 @@
 {
   "523db75f-fce0-4d41-8677-a1968c682f71": {
-    "checked_at": "2026-09-22T08:00:36.263931+00:00",
+    "checked_at": "2026-09-22T12:00:35.045200+00:00",
     "offers": [
       {
         "price": 306.0,
@@ -18,17 +18,17 @@
       },
       {
         "price": 342.0,
-        "airlines": "",
+        "airlines": "Frontier",
         "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
+        "duration_minutes": 185,
+        "raw_duration": "3 hr 5 min"
       },
       {
         "price": 342.0,
-        "airlines": "",
+        "airlines": "Frontier",
         "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
+        "duration_minutes": 185,
+        "raw_duration": "3 hr 5 min"
       },
       {
         "price": 358.0,
@@ -46,66 +46,66 @@
       },
       {
         "price": 427.0,
-        "airlines": "",
-        "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
+        "airlines": "Frontier",
+        "stops": 1,
+        "duration_minutes": 1165,
+        "raw_duration": "19 hr 25 min"
       },
       {
         "price": 427.0,
-        "airlines": "",
-        "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
+        "airlines": "Frontier",
+        "stops": 1,
+        "duration_minutes": 1165,
+        "raw_duration": "19 hr 25 min"
       },
       {
         "price": 438.0,
-        "airlines": "",
+        "airlines": "American",
         "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
+        "duration_minutes": 198,
+        "raw_duration": "3 hr 18 min"
       },
       {
         "price": 438.0,
-        "airlines": "",
+        "airlines": "Delta",
         "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
+        "duration_minutes": 179,
+        "raw_duration": "2 hr 59 min"
       },
       {
         "price": 438.0,
-        "airlines": "",
+        "airlines": "Delta",
         "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
+        "duration_minutes": 178,
+        "raw_duration": "2 hr 58 min"
       },
       {
         "price": 438.0,
-        "airlines": "",
+        "airlines": "American",
         "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
+        "duration_minutes": 199,
+        "raw_duration": "3 hr 19 min"
       },
       {
         "price": 438.0,
-        "airlines": "",
+        "airlines": "Delta",
         "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
+        "duration_minutes": 179,
+        "raw_duration": "2 hr 59 min"
       },
       {
         "price": 438.0,
-        "airlines": "",
+        "airlines": "American",
         "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
+        "duration_minutes": 198,
+        "raw_duration": "3 hr 18 min"
       },
       {
         "price": 438.0,
-        "airlines": "",
+        "airlines": "Delta",
         "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
+        "duration_minutes": 180,
+        "raw_duration": "3 hr"
       }
     ]
   },
