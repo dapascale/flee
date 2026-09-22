@@ -26,9 +26,38 @@ from dataclasses import dataclass
 from datetime import datetime, timedelta
 from typing import Optional
 
+import fast_flights.core as _ff_core
 from fast_flights import FlightData, Passengers, get_flights
 
 from .config import SavedSearch
+
+# fast_flights.core.fetch() hardcodes impersonate="chrome_126", which primp
+# has started rejecting with primp.BuilderError on some platforms/versions
+# (it broke every CI run while working fine locally) -- primp's supported
+# fingerprint list drifts as it drops stale Chrome versions. Patch fetch to
+# fall back through a few recent fingerprints instead of hardcoding one that
+# can go stale, so a future primp release doesn't silently kill every check.
+_IMPERSONATE_FALLBACKS = ("chrome_126", "chrome_131", "chrome_133", "chrome_120")
+
+
+def _fetch_with_impersonate_fallback(params: dict):
+    client = None
+    last_error: Exception | None = None
+    for impersonate in _IMPERSONATE_FALLBACKS:
+        try:
+            client = _ff_core.Client(impersonate=impersonate, verify=False)
+            break
+        except Exception as e:  # noqa: BLE001 -- primp.BuilderError isn't importable here
+            last_error = e
+    if client is None:
+        raise last_error
+
+    res = client.get("https://www.google.com/travel/flights", params=params)
+    assert res.status_code == 200, f"{res.status_code} Result: {res.text_markdown}"
+    return res
+
+
+_ff_core.fetch = _fetch_with_impersonate_fallback
 
 
 @dataclass
