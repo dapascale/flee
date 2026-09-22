@@ -32,12 +32,16 @@ from fast_flights import FlightData, Passengers, get_flights
 from .config import SavedSearch
 
 # fast_flights.core.fetch() hardcodes impersonate="chrome_126", which primp
-# has started rejecting with primp.BuilderError on some platforms/versions
-# (it broke every CI run while working fine locally) -- primp's supported
-# fingerprint list drifts as it drops stale Chrome versions. Patch fetch to
-# fall back through a few recent fingerprints instead of hardcoding one that
-# can go stale, so a future primp release doesn't silently kill every check.
-_IMPERSONATE_FALLBACKS = ("chrome_126", "chrome_131", "chrome_133", "chrome_120")
+# has started rejecting with primp.BuilderError (it broke every CI run while
+# working fine locally, on an older cached primp). requirements.txt doesn't
+# pin primp's version, so pip installs whatever's newest at run time -- and
+# primp 2.x renumbered its Chrome profiles entirely (dropped everything
+# below chrome_144) and added a bare "chrome" alias that always points at
+# its current latest, precisely so callers don't have to chase version
+# numbers. Prefer that alias, and fall back to pinned numbers only for
+# pre-2.x primp (which doesn't know the bare alias) so this survives future
+# primp releases without going stale again.
+_IMPERSONATE_FALLBACKS = ("chrome", "chrome_133", "chrome_126")
 
 
 def _fetch_with_impersonate_fallback(params: dict):
