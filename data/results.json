@@ -1,16 +1,93 @@
 {
   "523db75f-fce0-4d41-8677-a1968c682f71": {
-    "checked_at": "2026-10-26T18:59:20.694230+00:00",
+    "checked_at": "2026-10-27T18:30:57.308632+00:00",
     "offers": [
       {
-        "price": 312.0,
-        "airlines": "Frontier",
+        "price": 304.0,
+        "airlines": "",
         "stops": 0,
-        "duration_minutes": 185,
-        "raw_duration": "3 hr 5 min"
+        "duration_minutes": null,
+        "raw_duration": ""
       },
       {
-        "price": 312.0,
+        "price": 304.0,
+        "airlines": "",
+        "stops": 0,
+        "duration_minutes": null,
+        "raw_duration": ""
+      },
+      {
+        "price": 307.0,
+        "airlines": "",
+        "stops": 0,
+        "duration_minutes": null,
+        "raw_duration": ""
+      },
+      {
+        "price": 307.0,
+        "airlines": "",
+        "stops": 0,
+        "duration_minutes": null,
+        "raw_duration": ""
+      },
+      {
+        "price": 308.0,
+        "airlines": "",
+        "stops": 0,
+        "duration_minutes": null,
+        "raw_duration": ""
+      },
+      {
+        "price": 308.0,
+        "airlines": "",
+        "stops": 0,
+        "duration_minutes": null,
+        "raw_duration": ""
+      },
+      {
+        "price": 329.0,
+        "airlines": "",
+        "stops": 0,
+        "duration_minutes": null,
+        "raw_duration": ""
+      },
+      {
+        "price": 329.0,
+        "airlines": "",
+        "stops": 0,
+        "duration_minutes": null,
+        "raw_duration": ""
+      },
+      {
+        "price": 329.0,
+        "airlines": "",
+        "stops": 0,
+        "duration_minutes": null,
+        "raw_duration": ""
+      },
+      {
+        "price": 329.0,
+        "airlines": "",
+        "stops": 0,
+        "duration_minutes": null,
+        "raw_duration": ""
+      },
+      {
+        "price": 331.0,
+        "airlines": "Frontier",
+        "stops": 1,
+        "duration_minutes": 931,
+        "raw_duration": "15 hr 31 min"
+      },
+      {
+        "price": 331.0,
+        "airlines": "Frontier",
+        "stops": 1,
+        "duration_minutes": 931,
+        "raw_duration": "15 hr 31 min"
+      },
+      {
+        "price": 348.0,
         "airlines": "Frontier",
         "stops": 0,
         "duration_minutes": 185,
@@ -18,90 +95,13 @@
       },
       {
         "price": 348.0,
-        "airlines": "",
+        "airlines": "Frontier",
         "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
+        "duration_minutes": 185,
+        "raw_duration": "3 hr 5 min"
       },
       {
-        "price": 348.0,
-        "airlines": "",
-        "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
-      },
-      {
-        "price": 369.0,
-        "airlines": "",
-        "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
-      },
-      {
-        "price": 369.0,
-        "airlines": "",
-        "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
-      },
-      {
-        "price": 369.0,
-        "airlines": "",
-        "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
-      },
-      {
-        "price": 369.0,
-        "airlines": "",
-        "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
-      },
-      {
-        "price": 373.0,
-        "airlines": "",
-        "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
-      },
-      {
-        "price": 373.0,
-        "airlines": "",
-        "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
-      },
-      {
-        "price": 373.0,
-        "airlines": "",
-        "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
-      },
-      {
-        "price": 373.0,
-        "airlines": "",
-        "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
-      },
-      {
-        "price": 378.0,
-        "airlines": "",
-        "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
-      },
-      {
-        "price": 378.0,
-        "airlines": "",
-        "stops": 0,
-        "duration_minutes": null,
-        "raw_duration": ""
-      },
-      {
-        "price": 390.0,
+        "price": 350.0,
         "airlines": "",
         "stops": 0,
         "duration_minutes": null,
@@ -110,112 +110,112 @@
     ]
   },
   "4083896e-d9d6-4721-8159-9f01823598ba": {
-    "checked_at": "2026-10-25T16:56:42.582838+00:00",
+    "checked_at": "2026-10-27T18:31:09.901904+00:00",
     "offers": [
       {
-        "price": 1262.0,
-        "airlines": "American, British Airways",
-        "stops": 1,
-        "duration_minutes": 1021,
-        "raw_duration": "17 hr 1 min"
-      },
-      {
-        "price": 1262.0,
-        "airlines": "American, British Airways",
-        "stops": 1,
-        "duration_minutes": 1261,
-        "raw_duration": "21 hr 1 min"
-      },
-      {
-        "price": 1262.0,
-        "airlines": "American, British Airways",
-        "stops": 1,
-        "duration_minutes": 844,
-        "raw_duration": "14 hr 4 min"
-      },
-      {
-        "price": 1262.0,
-        "airlines": "American, British Airways",
-        "stops": 1,
-        "duration_minutes": 1084,
-        "raw_duration": "18 hr 4 min"
-      },
-      {
-        "price": 1262.0,
-        "airlines": "American, British Airways",
-        "stops": 1,
-        "duration_minutes": 736,
-        "raw_duration": "12 hr 16 min"
-      },
-      {
-        "price": 1262.0,
-        "airlines": "American, British Airways",
-        "stops": 1,
-        "duration_minutes": 1021,
-        "raw_duration": "17 hr 1 min"
-      },
-      {
-        "price": 1262.0,
-        "airlines": "American, British Airways",
-        "stops": 1,
-        "duration_minutes": 1261,
-        "raw_duration": "21 hr 1 min"
-      },
-      {
-        "price": 1262.0,
-        "airlines": "American, British Airways",
-        "stops": 1,
-        "duration_minutes": 844,
-        "raw_duration": "14 hr 4 min"
-      },
-      {
-        "price": 1262.0,
-        "airlines": "American, British Airways",
-        "stops": 1,
-        "duration_minutes": 1084,
-        "raw_duration": "18 hr 4 min"
-      },
-      {
-        "price": 1262.0,
-        "airlines": "American, British Airways",
-        "stops": 1,
-        "duration_minutes": 736,
-        "raw_duration": "12 hr 16 min"
-      },
-      {
-        "price": 1292.0,
-        "airlines": "American, British Airways",
-        "stops": 1,
-        "duration_minutes": 682,
-        "raw_duration": "11 hr 22 min"
-      },
-      {
-        "price": 1292.0,
-        "airlines": "American, British Airways",
-        "stops": 1,
-        "duration_minutes": 922,
-        "raw_duration": "15 hr 22 min"
-      },
-      {
-        "price": 1292.0,
-        "airlines": "American, British Airways",
-        "stops": 1,
-        "duration_minutes": 682,
-        "raw_duration": "11 hr 22 min"
-      },
-      {
-        "price": 1292.0,
-        "airlines": "American, British Airways",
-        "stops": 1,
-        "duration_minutes": 922,
-        "raw_duration": "15 hr 22 min"
-      },
-      {
-        "price": 1416.0,
-        "airlines": "Delta",
+        "price": 1258.0,
+        "airlines": "",
         "stops": 0,
-        "duration_minutes": 440,
-        "raw_duration": "7 hr 20 min"
+        "duration_minutes": null,
+        "raw_duration": ""
+      },
+      {
+        "price": 1258.0,
+        "airlines": "",
+        "stops": 0,
+        "duration_minutes": null,
+        "raw_duration": ""
+      },
+      {
+        "price": 1258.0,
+        "airlines": "",
+        "stops": 0,
+        "duration_minutes": null,
+        "raw_duration": ""
+      },
+      {
+        "price": 1258.0,
+        "airlines": "",
+        "stops": 0,
+        "duration_minutes": null,
+        "raw_duration": ""
+      },
+      {
+        "price": 1258.0,
+        "airlines": "",
+        "stops": 0,
+        "duration_minutes": null,
+        "raw_duration": ""
+      },
+      {
+        "price": 1258.0,
+        "airlines": "",
+        "stops": 0,
+        "duration_minutes": null,
+        "raw_duration": ""
+      },
+      {
+        "price": 1258.0,
+        "airlines": "",
+        "stops": 0,
+        "duration_minutes": null,
+        "raw_duration": ""
+      },
+      {
+        "price": 1258.0,
+        "airlines": "",
+        "stops": 0,
+        "duration_minutes": null,
+        "raw_duration": ""
+      },
+      {
+        "price": 1258.0,
+        "airlines": "",
+        "stops": 0,
+        "duration_minutes": null,
+        "raw_duration": ""
+      },
+      {
+        "price": 1258.0,
+        "airlines": "",
+        "stops": 0,
+        "duration_minutes": null,
+        "raw_duration": ""
+      },
+      {
+        "price": 1258.0,
+        "airlines": "",
+        "stops": 0,
+        "duration_minutes": null,
+        "raw_duration": ""
+      },
+      {
+        "price": 1258.0,
+        "airlines": "",
+        "stops": 0,
+        "duration_minutes": null,
+        "raw_duration": ""
+      },
+      {
+        "price": 1258.0,
+        "airlines": "",
+        "stops": 0,
+        "duration_minutes": null,
+        "raw_duration": ""
+      },
+      {
+        "price": 1258.0,
+        "airlines": "",
+        "stops": 0,
+        "duration_minutes": null,
+        "raw_duration": ""
+      },
+      {
+        "price": 1422.0,
+        "airlines": "",
+        "stops": 0,
+        "duration_minutes": null,
+        "raw_duration": ""
       }
     ]
   }
