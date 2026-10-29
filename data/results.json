@@ -1,34 +1,20 @@
 {
   "523db75f-fce0-4d41-8677-a1968c682f71": {
-    "checked_at": "2026-10-28T18:37:10.549233+00:00",
+    "checked_at": "2026-10-29T18:45:44.943347+00:00",
     "offers": [
       {
         "price": 287.0,
-        "airlines": "Frontier",
-        "stops": 1,
-        "duration_minutes": 672,
-        "raw_duration": "11 hr 12 min"
+        "airlines": "",
+        "stops": 0,
+        "duration_minutes": null,
+        "raw_duration": ""
       },
       {
         "price": 287.0,
-        "airlines": "Frontier",
-        "stops": 1,
-        "duration_minutes": 672,
-        "raw_duration": "11 hr 12 min"
-      },
-      {
-        "price": 292.0,
-        "airlines": "Frontier",
-        "stops": 1,
-        "duration_minutes": 425,
-        "raw_duration": "7 hr 5 min"
-      },
-      {
-        "price": 292.0,
-        "airlines": "Frontier",
-        "stops": 1,
-        "duration_minutes": 425,
-        "raw_duration": "7 hr 5 min"
+        "airlines": "",
+        "stops": 0,
+        "duration_minutes": null,
+        "raw_duration": ""
       },
       {
         "price": 300.0,
@@ -45,46 +31,18 @@
         "raw_duration": "3 hr 5 min"
       },
       {
-        "price": 304.0,
-        "airlines": "Frontier",
-        "stops": 1,
-        "duration_minutes": 879,
-        "raw_duration": "14 hr 39 min"
-      },
-      {
-        "price": 304.0,
-        "airlines": "Frontier",
-        "stops": 1,
-        "duration_minutes": 879,
-        "raw_duration": "14 hr 39 min"
-      },
-      {
-        "price": 307.0,
-        "airlines": "Frontier",
-        "stops": 1,
-        "duration_minutes": 339,
-        "raw_duration": "5 hr 39 min"
-      },
-      {
-        "price": 307.0,
-        "airlines": "Frontier",
-        "stops": 1,
-        "duration_minutes": 339,
-        "raw_duration": "5 hr 39 min"
-      },
-      {
-        "price": 326.0,
-        "airlines": "Frontier",
+        "price": 323.0,
+        "airlines": "",
         "stops": 0,
-        "duration_minutes": 185,
-        "raw_duration": "3 hr 5 min"
+        "duration_minutes": null,
+        "raw_duration": ""
       },
       {
-        "price": 326.0,
-        "airlines": "Frontier",
+        "price": 323.0,
+        "airlines": "",
         "stops": 0,
-        "duration_minutes": 185,
-        "raw_duration": "3 hr 5 min"
+        "duration_minutes": null,
+        "raw_duration": ""
       },
       {
         "price": 327.0,
@@ -106,6 +64,48 @@
         "stops": 1,
         "duration_minutes": 318,
         "raw_duration": "5 hr 18 min"
+      },
+      {
+        "price": 327.0,
+        "airlines": "Frontier",
+        "stops": 1,
+        "duration_minutes": 692,
+        "raw_duration": "11 hr 32 min"
+      },
+      {
+        "price": 342.0,
+        "airlines": "",
+        "stops": 0,
+        "duration_minutes": null,
+        "raw_duration": ""
+      },
+      {
+        "price": 342.0,
+        "airlines": "",
+        "stops": 0,
+        "duration_minutes": null,
+        "raw_duration": ""
+      },
+      {
+        "price": 344.0,
+        "airlines": "Frontier",
+        "stops": 1,
+        "duration_minutes": 931,
+        "raw_duration": "15 hr 31 min"
+      },
+      {
+        "price": 344.0,
+        "airlines": "Frontier",
+        "stops": 1,
+        "duration_minutes": 1165,
+        "raw_duration": "19 hr 25 min"
+      },
+      {
+        "price": 344.0,
+        "airlines": "Frontier",
+        "stops": 1,
+        "duration_minutes": 931,
+        "raw_duration": "15 hr 31 min"
       }
     ]
   },
